@@ -42,14 +42,10 @@ export class BluetoothListingComponent{
       filters: [
         {services: ['heart_rate']},
         {services: [0x1802, 0x1803]},
-        {services: ['c48e6067-5295-48d3-8d5c-0395f61792b1']},
-        {name: 'ExampleName'},
-        {namePrefix: 'Prefix'}
-      ],
-      optionalServices: ['battery_service']
+      ]
     } 
     
-    return navigator.bluetooth.requestDevice({filters:[{services:[ 'heart_rate' ]}]})
+    return navigator.bluetooth.requestDevice(options)
     .then(device => {
       console.log('did we make it');
       return device.gatt.connect();
@@ -66,15 +62,9 @@ export class BluetoothListingComponent{
       characteristic.startNotifications().then(()=>{
         characteristic.addEventListener('characteristicvaluechanged', ()=>{
           if(characteristic.value){
-            let length = characteristic.value.byteLength;
-          
-          let a = [];
 
-          for (let i = 0; i < length; i++) {
-            a.push(characteristic.value.getUint8(i).toString().slice(-2));
-          }
-          console.log('> ' + a.join(' '));
-          this.heartRate = a[1];
+            console.log('> ' + characteristic.value.getUint8(0).toString());
+            this.heartRate = characteristic.value.getUint8(0).toString();
         }
         });
       });
