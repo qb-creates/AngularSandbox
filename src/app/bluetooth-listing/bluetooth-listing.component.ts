@@ -39,11 +39,10 @@ export class BluetoothListingComponent{
   SearchBluetooth() {
     this.heartRate = "";
     let options = {
-      //filters: [
-      //  {services: ['heart_rate']},
-      //  {services: [0x1802, 0x1803]},
-     // ]
-     acceptAllDevices:true
+      filters: [
+        {services: ['heart_rate']},
+        {services: [0x1802, 0x1803]},
+      ]
     } 
     
     return navigator.bluetooth.requestDevice(options)
