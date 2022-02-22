@@ -1,6 +1,7 @@
-import { Component, Output } from '@angular/core';
+import { Component, ModuleWithComponentFactories, Output } from '@angular/core';
 import { NgxSerial } from 'ngx-serial';
-
+import { HttpClient } from '@angular/common/http';
+import { PolarModel } from '../_interfaces/polar.model';
 @Component({
   selector: 'app-bluetooth-listing',
   templateUrl: './bluetooth-listing.component.html',
@@ -10,9 +11,10 @@ export class BluetoothListingComponent{
   serial:NgxSerial;
   port:any;
   peak:number;
+  polar:PolarModel;
 
   @Output() heartRate = "";
-  constructor() 
+  constructor(private http:HttpClient) 
   { 
     let options = 
     { 
@@ -30,10 +32,12 @@ export class BluetoothListingComponent{
   }
   @Output() data!:string;
 
-  SearchDevices(){    
-    this.serial.connect((port:any) =>{
-      console.log(port);
-    });
+  SignalRSend(){
+    
+    this.polar.HeartRate = 80;
+    this.polar.RRinterval = 880;
+    this.polar.Id = 9;
+    this.http.post('https://localhost:5001/api/chart',this.polar).subscribe();
   }
 
   SearchBluetooth() {
