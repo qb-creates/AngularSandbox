@@ -1,26 +1,30 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@aspnet/signalr';
-import { ChartModel } from '../_interfaces/chartmodel.model';
+import { PolarModel } from '../_interfaces/polar.model';
 @Injectable({
   providedIn: 'root'
 })
 export class SignalRService {
-  public data: ChartModel[];
-  private hubConnection: signalR.HubConnection;
   
+  private hubConnection: signalR.HubConnection;
+  private data: PolarModel;
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-    .withUrl('https://localhost:5001/chart')
+    .withUrl('https://localhost:5001/polar')
     .build();
 
     this.hubConnection.start()
     .then(() => console.log('Connection started'))
     .catch(err => console.log('Error while starting connection: ' + err))
   }
-  public addTransferChartDataListener = () => {
-    this.hubConnection.on('transferchartdata', (data)=>{
+
+  public addTransferListener = () => {
+    this.hubConnection.on('HeartRateReceived', (data)=>{
       this.data = data;
       console.log(data);
     });
+  }
+  public send = (data:PolarModel) => {
+    this.hubConnection.send("UpdateHeartRate", data);
   }
 }

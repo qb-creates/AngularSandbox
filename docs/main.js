@@ -74,7 +74,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<app-bluetooth-listing></app-bluetooth-listing>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<app-bluetooth-listing></app-bluetooth-listing>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -105,13 +105,7 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.ngOnInit = function () {
         this.signalRService.startConnection();
         this.signalRService.addTransferChartDataListener();
-        this.startHttpRequest();
-    };
-    AppComponent.prototype.startHttpRequest = function () {
-        this.http.get('https://localhost:5001/api/chart')
-            .subscribe(function (res) {
-            console.log("Data:  " + res);
-        });
+        //this.startHttpRequest();
     };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -197,7 +191,7 @@ module.exports = "#comHeader{\r\n    color: whitesmoke;\r\n    font-size:60px;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 id=\"comHeader\">E3K Heart Rate</h1>\r\n<h1 [textContent]=\"heartRate\"></h1>\r\n<button (click)=\"SearchBluetooth()\">Search BLE</button>\r\n\r\n<button (click)=\"SingalRSend()\">Signal-r Send</button>\r\n\r\n"
+module.exports = "<h1 id=\"comHeader\">E3K Heart Rate</h1>\r\n<h1 [textContent]=\"heartRate\"></h1>\r\n<button (click)=\"SearchBluetooth()\">Search BLE</button>\r\n\r\n<button (click)=\"SignalRSend()\">Signal-r Send</button>\r\n\r\n"
 
 /***/ }),
 
@@ -213,31 +207,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BluetoothListingComponent", function() { return BluetoothListingComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var ngx_serial__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-serial */ "./node_modules/ngx-serial/fesm2015/ngx-serial.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var _services_signal_r_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/signal-r.service */ "./src/app/services/signal-r.service.ts");
 
 
 
 
 var BluetoothListingComponent = /** @class */ (function () {
-    function BluetoothListingComponent(http) {
-        var _this = this;
+    function BluetoothListingComponent(signalRService, http) {
+        this.signalRService = signalRService;
         this.http = http;
         this.heartRate = "";
-        var options = {
-            baudRate: 115200,
-            dataBits: 8,
-            parity: 'none',
-            bufferSize: 256,
-            flowControl: 'none'
-        };
-        this.serial = new ngx_serial__WEBPACK_IMPORTED_MODULE_2__["NgxSerial"](function (data) {
-            _this.data = data;
-            console.log(data);
-        }, options);
     }
+    BluetoothListingComponent.prototype.ngOnInit = function () {
+        this.signalRService.startConnection();
+        this.signalRService.addTransferChartDataListener();
+    };
     BluetoothListingComponent.prototype.SignalRSend = function () {
-        this.http.post('https://localhost:5001/api/chart', "quentin");
+        this.signalRService.send();
+        /*
+        this.polar.HeartRate = 80;
+        this.polar.RRinterval = 880;
+        this.polar.Id = 9;
+        this.http.post('https://localhost:5001/api/chart',this.polar).subscribe();*/
     };
     BluetoothListingComponent.prototype.SearchBluetooth = function () {
         var _this = this;
@@ -288,7 +280,7 @@ var BluetoothListingComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./bluetooth-listing.component.html */ "./src/app/bluetooth-listing/bluetooth-listing.component.html"),
             styles: [__webpack_require__(/*! ./bluetooth-listing.component.css */ "./src/app/bluetooth-listing/bluetooth-listing.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_signal_r_service__WEBPACK_IMPORTED_MODULE_3__["SignalRService"], _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
     ], BluetoothListingComponent);
     return BluetoothListingComponent;
 }());
@@ -329,6 +321,10 @@ var SignalRService = /** @class */ (function () {
                 _this.data = data;
                 console.log(data);
             });
+        };
+        this.send = function () {
+            _this.hubConnection.send("newMessage", 22)
+                .then(function () { return console.log("Message sent"); });
         };
     }
     SignalRService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -404,7 +400,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Crestron\Angular\AngularSandbox\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! F:\Dev\Angular\angular-sandbox\src\main.ts */"./src/main.ts");
 
 
 /***/ })

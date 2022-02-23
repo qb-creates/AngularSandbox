@@ -1,6 +1,5 @@
-import { Component, ModuleWithComponentFactories, Output } from '@angular/core';
-import { NgxSerial } from 'ngx-serial';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Output } from '@angular/core';
+import { SignalRService } from '../services/signal-r.service';
 import { PolarModel } from '../_interfaces/polar.model';
 @Component({
   selector: 'app-bluetooth-listing',
@@ -8,71 +7,51 @@ import { PolarModel } from '../_interfaces/polar.model';
   styleUrls: ['./bluetooth-listing.component.css']
 })
 export class BluetoothListingComponent{
-  serial:NgxSerial;
-  port:any;
-  peak:number;
-  polar:PolarModel;
-
-  @Output() heartRate = "";
-  constructor(private http:HttpClient) 
+  polarModel:PolarModel = {
+    HeartRate: 60,
+    RRinterval: 900
+  };
+  options = {
+    filters: [
+      {services: ['heart_rate']},
+      {services: [0x1802, 0x1803]},
+    ]
+  } 
+  constructor(public signalRService: SignalRService) 
   { 
-    let options = 
-    { 
-      baudRate: 115200, 
-      dataBits: 8, 
-      parity: 'none', 
-      bufferSize: 256, 
-      flowControl: 'none' 
-    };
-    
-    this.serial = new NgxSerial(data=>{
-      this.data = data;
-      console.log(data);
-    }, options);
   }
-  @Output() data!:string;
+  ngOnInit(){
+    this.signalRService.startConnection();
+    this.signalRService.addTransferListener();
+  }
 
   SignalRSend(){
-    
-    this.polar.HeartRate = 80;
-    this.polar.RRinterval = 880;
-    this.polar.Id = 9;
-    this.http.post('https://localhost:5001/api/chart',this.polar).subscribe();
+    this.signalRService.send(this.polarModel);
   }
 
   SearchBluetooth() {
-    this.heartRate = "";
-    let options = {
-      filters: [
-        {services: ['heart_rate']},
-        {services: [0x1802, 0x1803]},
-      ]
-    } 
-    
-    return navigator.bluetooth.requestDevice(options)
+    return navigator.bluetooth.requestDevice(this.options)
     .then(device => {
-      console.log('did we make it');
       return device.gatt.connect();
     })
     .then(server => {
-      console.log('did we make it');
       return server.getPrimaryService('heart_rate');
     })
     .then(service => {
-      console.log('did we make it');
       return service.getCharacteristic('heart_rate_measurement');
     })
     .then(characteristic => {
       characteristic.startNotifications().then(()=>{
         characteristic.addEventListener('characteristicvaluechanged', ()=>{
           if(characteristic.value){
-
-            console.log('> ' + characteristic.value.getUint8(0).toString());
-            this.heartRate = characteristic.value.getUint8(0).toString();
-        }
+            this.polarModel.HeartRate = characteristic.value.getUint8(0);
+            this.polarModel.RRinterval = Math.round(60000 /characteristic.value.getUint8(0));
+            this.signalRService.send(this.polarModel);
+          }
         });
       });
-    }).catch(error => {
+    })
+    .catch(error => {
       console.log('Argh!! ' + error);
     });
   }
