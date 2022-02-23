@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import * as signalR from '@aspnet/signalr';
+import * as signalR from '@microsoft/signalr';
 import { PolarModel } from '../_interfaces/polar.model';
+import { Subject } from 'rxjs';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,6 +27,21 @@ export class SignalRService {
     });
   }
   public send = (data:PolarModel) => {
-    this.hubConnection.send("UpdateHeartRate", data);
+    let subject = new Subject();
+    
+    //this.hubConnection.send("UploadStream", subject);
+    this.hubConnection.send("UploadStream", subject);
+    let iteration = 0;
+    
+    let intervalHandle = setInterval(()=>{
+      iteration++;
+      subject.next(iteration.toString());
+      if(iteration === 10){
+        clearInterval(intervalHandle);
+        subject.complete();
+      }
+      console.log(iteration.toString());
+    }, 500);
+    console.log("did it");
   }
 }
