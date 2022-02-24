@@ -17,9 +17,7 @@ export class BluetoothListingComponent{
       {services: [0x1802, 0x1803]},
     ]
   } 
-  constructor(public signalRService: SignalRService) 
-  { 
-  }
+  constructor(public signalRService: SignalRService){}
   ngOnInit(){
     this.signalRService.startConnection();
     this.signalRService.addTransferListener();
@@ -28,7 +26,9 @@ export class BluetoothListingComponent{
   SignalRSend(){
     this.signalRService.send(this.polarModel);
   }
-
+  SignalRCloseStream(){
+    this.signalRService.closeStream();
+  }
   SearchBluetooth() {
     return navigator.bluetooth.requestDevice(this.options)
     .then(device => {

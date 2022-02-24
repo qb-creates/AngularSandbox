@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR from '@microsoft/signalr';
 import { PolarModel } from '../_interfaces/polar.model';
-import { Subject } from 'rxjs';
+import { Subject, Observable, AsyncSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,39 +9,36 @@ import { Subject } from 'rxjs';
 export class SignalRService {
   
   private hubConnection: signalR.HubConnection;
-  private data: PolarModel;
+  private subject: any;
+  constructor(){
+  }
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
     .withUrl('https://localhost:5001/polar')
     .build();
 
     this.hubConnection.start()
-    .then(() => console.log('Connection started'))
+    .then(() =>{ 
+      console.log('Connection started');
+      this.subject = new signalR.Subject();
+      this.hubConnection.send("UploadStream", this.subject);
+    })
     .catch(err => console.log('Error while starting connection: ' + err))
   }
 
   public addTransferListener = () => {
-    this.hubConnection.on('HeartRateReceived', (data)=>{
-      this.data = data;
+    this.hubConnection.on('HeartRateReceived', (data:PolarModel)=>{
       console.log(data);
     });
   }
-  public send = (data:PolarModel) => {
-    let subject = new Subject();
-    
-    //this.hubConnection.send("UploadStream", subject);
-    this.hubConnection.send("UploadStream", subject);
-    let iteration = 0;
-    
-    let intervalHandle = setInterval(()=>{
-      iteration++;
-      subject.next(iteration.toString());
-      if(iteration === 10){
-        clearInterval(intervalHandle);
-        subject.complete();
-      }
-      console.log(iteration.toString());
-    }, 500);
-    console.log("did it");
+  public send = (polarModel:PolarModel) => {
+    this.subject.next(polarModel);
+  }
+
+  public openStream(){
+    this.hubConnection.send("UploadStream", this.subject);
+  }
+  public closeStream(){
+    this.subject.complete();
   }
 }
