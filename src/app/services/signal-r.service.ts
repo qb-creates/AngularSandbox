@@ -34,6 +34,9 @@ export class SignalRService {
   public send = (polarModel:PolarModel) => {
     this.subject.next(polarModel);
   }
+  public send2 = (polarModel:PolarModel) =>{
+    this.hubConnection.send("UpdateHeartRate", polarModel);
+  }
 
   public openStream(){
     this.hubConnection.send("UploadStream", this.subject);

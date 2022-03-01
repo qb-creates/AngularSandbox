@@ -3,9 +3,10 @@ import { ToastrService } from 'ngx-toastr';
 import * as SignalR from '@microsoft/signalr';
 //import { environment } from '../../../../../environments/environment';
 //import { OpenIdConnectService } from '../../../../core/open-id-connect/open-id-connect.service';
-import { HubUser } from '../_interfaces/HubUser';
+import { HubUser, UserOrigin } from '../_interfaces/HubUser';
 import { Guid } from 'guid-typescript';
 import { HubMessage } from '../_interfaces/HubMessage';
+import { Console } from 'console';
 @Component({
   selector: 'facility-hub-connector',
   templateUrl: 'facility-hub-connector.component.html',
@@ -27,7 +28,20 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
   hubConnectionInitialized: boolean;
   connectedToHub: boolean;
   connectedToUser: boolean;
-  localUser: HubUser = null;
+  localUser: HubUser = 
+  {
+    connectionId: "123456",
+    groupId: "123456",
+    name: "Quentin",
+    deviceId: Guid.create(),
+    deviceName: "Waya Test Device",
+    facilityId: Guid.create(),
+    facilityName: "Wellovate",
+    connectedToOtherUsers: false,
+    connectedUserIds:["4321"],
+    userOrigin: UserOrigin.Device,
+    sessionId: Guid.create()
+  };
   connectedUser: HubUser = null;
 ​
   //Ng Models
@@ -59,7 +73,7 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
     this.terminateHubConnection();
   }
 ​
-  establishHubConnection() {
+  establishHubConnection(){ 
     this.hubConnection = new SignalR.HubConnectionBuilder()
       .withUrl("https://localhost:5001/polar")
       .configureLogging(SignalR.LogLevel.Information)
@@ -168,6 +182,7 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
   }
 ​
   hubUsersUpdated(users: HubUser[]) {
+    console.log("Users updated");
     this.connectedHubUsers = [];
 ​
     users.forEach(u => {
@@ -182,6 +197,7 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
         }
       }
     });
+    //this.connectedHubUsers.push(this.localUser);
   }
 ​
   hubConnectionMessageReceived(hubMessage: HubMessage) {

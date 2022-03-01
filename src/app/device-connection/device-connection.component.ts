@@ -8,7 +8,7 @@ import { Guid } from 'guid-typescript';
 })
 export class DeviceConnectionComponent implements OnInit {
   hubEndpoint:string = "sdfdf";
-  facilityId!:Guid;
+  facilityId!:Guid ;
   connectToUserEnabled:boolean = false;
   constructor() { }
 

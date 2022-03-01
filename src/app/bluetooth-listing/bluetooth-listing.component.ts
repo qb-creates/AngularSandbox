@@ -24,7 +24,7 @@ export class BluetoothListingComponent{
   }
 
   SignalRSend(){
-    this.signalRService.send(this.polarModel);
+    this.signalRService.send2(this.polarModel);
   }
   SignalRCloseStream(){
     this.signalRService.closeStream();
