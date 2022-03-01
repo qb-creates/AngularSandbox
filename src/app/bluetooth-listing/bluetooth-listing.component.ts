@@ -8,8 +8,8 @@ import { PolarModel } from '../_interfaces/polar.model';
 })
 export class BluetoothListingComponent{
   polarModel:PolarModel = {
-    HeartRate: 60,
-    RRinterval: 900
+    heartRate: 60,
+    rrInterval: 900
   };
   options = {
     filters: [
@@ -44,8 +44,8 @@ export class BluetoothListingComponent{
       characteristic.startNotifications().then(()=>{
         characteristic.addEventListener('characteristicvaluechanged', ()=>{
           if(characteristic.value){
-            this.polarModel.HeartRate = characteristic.value.getUint8(0);
-            this.polarModel.RRinterval = Math.round(60000 /characteristic.value.getUint8(0));
+            this.polarModel.heartRate = characteristic.value.getUint8(0);
+            this.polarModel.rrInterval = Math.round(60000 /characteristic.value.getUint8(0));
             this.signalRService.send(this.polarModel);
           }
         });

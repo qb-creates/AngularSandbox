@@ -1,0 +1,45 @@
+audio {
+    width: 90%;
+  }
+  table {
+    border-collapse: collapse;
+  }
+  th, td {
+    border: 1px solid black;
+  }
+  tr:hover {
+    background-color: #F5F5F5;
+  }
+  div.graph-container {
+    float: left;
+    margin: 0.5em;
+    width: calc(50% - 1em);
+  }
+  a#viewSource {
+    clear: both;
+  }
+  div.users-box {
+    margin-top: 15px;
+    height: 150px; width: 100%;
+    border: 2px solid black;
+    overflow-y: scroll
+  }
+  div.user-box{
+    height: 40px;
+    cursor: pointer;
+    vertical-align: middle;
+    line-height: 40px;
+  }
+  div.user-box.selected{
+    background-color: darkgrey !important;
+  }
+  div.user-box.inCall {
+    color: red;
+    cursor: default;
+  }
+  div.user-box:nth-child(even){
+    background-color: beige;
+  }
+  .row {
+    margin-bottom: 10px;
+  }

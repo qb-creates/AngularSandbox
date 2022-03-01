@@ -74,7 +74,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<app-bluetooth-listing></app-bluetooth-listing>\n<router-outlet></router-outlet>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<app-device-connection></app-device-connection>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -130,10 +130,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app-routing.module */ "./src/app/app-routing.module.ts");
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app.component */ "./src/app/app.component.ts");
 /* harmony import */ var _bluetooth_listing_bluetooth_listing_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./bluetooth-listing/bluetooth-listing.component */ "./src/app/bluetooth-listing/bluetooth-listing.component.ts");
+/* harmony import */ var _facility_hub_connector_facility_hub_connector_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./facility-hub-connector/facility-hub-connector.component */ "./src/app/facility-hub-connector/facility-hub-connector.component.ts");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _device_connection_device_connection_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./device-connection/device-connection.component */ "./src/app/device-connection/device-connection.component.ts");
 
 
 
 //import {NgChartsModule} from 'ng2-charts';
+
+
+
 
 
 
@@ -145,12 +151,16 @@ var AppModule = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
             declarations: [
                 _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
-                _bluetooth_listing_bluetooth_listing_component__WEBPACK_IMPORTED_MODULE_6__["BluetoothListingComponent"]
+                _bluetooth_listing_bluetooth_listing_component__WEBPACK_IMPORTED_MODULE_6__["BluetoothListingComponent"],
+                _facility_hub_connector_facility_hub_connector_component__WEBPACK_IMPORTED_MODULE_7__["FacilityHubConnectorComponent"],
+                _device_connection_device_connection_component__WEBPACK_IMPORTED_MODULE_9__["DeviceConnectionComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
                 //NgChartsModule,
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
+                _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
             ],
             providers: [],
@@ -182,7 +192,7 @@ module.exports = "#comHeader{\r\n    color: whitesmoke;\r\n    font-size:60px;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 id=\"comHeader\">E3K Heart Rate</h1>\r\n<button (click)=\"SearchBluetooth()\">Search BLE</button>\r\n\r\n<button (click)=\"SignalRSend()\">Signal-r Send</button>\r\n\r\n<button (click)=\"SignalRCloseStream()\">Signal-r Close</button>\r\n\r\n"
+module.exports = "<h1 id=\"comHeader\">E3K Heart Rate</h1>\r\n<button (click)=\"SearchBluetooth()\">Search BLE</button>\r\n\r\n<button (click)=\"SignalRSend()\">Signal-r Send</button>\r\n\r\n<button (click)=\"SignalRCloseStream()\">Signal-r Close</button>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -206,8 +216,8 @@ var BluetoothListingComponent = /** @class */ (function () {
     function BluetoothListingComponent(signalRService) {
         this.signalRService = signalRService;
         this.polarModel = {
-            HeartRate: 60,
-            RRinterval: 900
+            heartRate: 60,
+            rrInterval: 900
         };
         this.options = {
             filters: [
@@ -221,7 +231,7 @@ var BluetoothListingComponent = /** @class */ (function () {
         this.signalRService.addTransferListener();
     };
     BluetoothListingComponent.prototype.SignalRSend = function () {
-        this.signalRService.send();
+        this.signalRService.send(this.polarModel);
     };
     BluetoothListingComponent.prototype.SignalRCloseStream = function () {
         this.signalRService.closeStream();
@@ -242,9 +252,9 @@ var BluetoothListingComponent = /** @class */ (function () {
             characteristic.startNotifications().then(function () {
                 characteristic.addEventListener('characteristicvaluechanged', function () {
                     if (characteristic.value) {
-                        _this.polarModel.HeartRate = characteristic.value.getUint8(0);
-                        _this.polarModel.RRinterval = Math.round(60000 / characteristic.value.getUint8(0));
-                        _this.signalRService.send();
+                        _this.polarModel.heartRate = characteristic.value.getUint8(0);
+                        _this.polarModel.rrInterval = Math.round(60000 / characteristic.value.getUint8(0));
+                        _this.signalRService.send(_this.polarModel);
                     }
                 });
             });
@@ -268,6 +278,396 @@ var BluetoothListingComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/device-connection/device-connection.component.css":
+/*!*******************************************************************!*\
+  !*** ./src/app/device-connection/device-connection.component.css ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2RldmljZS1jb25uZWN0aW9uL2RldmljZS1jb25uZWN0aW9uLmNvbXBvbmVudC5jc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/device-connection/device-connection.component.html":
+/*!********************************************************************!*\
+  !*** ./src/app/device-connection/device-connection.component.html ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<facility-hub-connector [hubEndpoint]=\"hubEndpoint\" [facilityId]=\"facilityId\" [allowDeviceUserConnections]=\"true\"\n  [allowWebUserConnections]=\"false\" [allowConnectToUser]=\"connectToUserEnabled\"\n  (messageReceived)=\"onMessageReceived($event)\" (connected)=\"onConnected()\" (userConnected)=\"onUserConnected($event)\"\n  (userDisconnected)=\"onUserDisconnected()\" (disconnected)=\"onDisconnected()\"></facility-hub-connector>"
+
+/***/ }),
+
+/***/ "./src/app/device-connection/device-connection.component.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/device-connection/device-connection.component.ts ***!
+  \******************************************************************/
+/*! exports provided: DeviceConnectionComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeviceConnectionComponent", function() { return DeviceConnectionComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var DeviceConnectionComponent = /** @class */ (function () {
+    function DeviceConnectionComponent() {
+    }
+    DeviceConnectionComponent.prototype.ngOnInit = function () {
+    };
+    DeviceConnectionComponent.prototype.onMessageReceived = function () {
+    };
+    DeviceConnectionComponent.prototype.onConnected = function () {
+    };
+    DeviceConnectionComponent.prototype.onUserConnected = function () {
+    };
+    DeviceConnectionComponent.prototype.onUserDisconnected = function () {
+    };
+    DeviceConnectionComponent.prototype.onDisconnected = function () {
+    };
+    DeviceConnectionComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-device-connection',
+            template: __webpack_require__(/*! ./device-connection.component.html */ "./src/app/device-connection/device-connection.component.html"),
+            styles: [__webpack_require__(/*! ./device-connection.component.css */ "./src/app/device-connection/device-connection.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], DeviceConnectionComponent);
+    return DeviceConnectionComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/facility-hub-connector/facility-hub-connector.component.css":
+/*!*****************************************************************************!*\
+  !*** ./src/app/facility-hub-connector/facility-hub-connector.component.css ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "audio {\r\n    width: 90%;\r\n  }\r\n  table {\r\n    border-collapse: collapse;\r\n  }\r\n  th, td {\r\n    border: 1px solid black;\r\n  }\r\n  tr:hover {\r\n    background-color: #F5F5F5;\r\n  }\r\n  div.graph-container {\r\n    float: left;\r\n    margin: 0.5em;\r\n    width: calc(50% - 1em);\r\n  }\r\n  a#viewSource {\r\n    clear: both;\r\n  }\r\n  div.users-box {\r\n    margin-top: 15px;\r\n    height: 150px; width: 100%;\r\n    border: 2px solid black;\r\n    overflow-y: scroll\r\n  }\r\n  div.user-box{\r\n    height: 40px;\r\n    cursor: pointer;\r\n    vertical-align: middle;\r\n    line-height: 40px;\r\n  }\r\n  div.user-box.selected{\r\n    background-color: darkgrey !important;\r\n  }\r\n  div.user-box.inCall {\r\n    color: red;\r\n    cursor: default;\r\n  }\r\n  div.user-box:nth-child(even){\r\n    background-color: beige;\r\n  }\r\n  .row {\r\n    margin-bottom: 10px;\r\n  }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmFjaWxpdHktaHViLWNvbm5lY3Rvci9mYWNpbGl0eS1odWItY29ubmVjdG9yLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxVQUFVO0VBQ1o7RUFDQTtJQUNFLHlCQUF5QjtFQUMzQjtFQUNBO0lBQ0UsdUJBQXVCO0VBQ3pCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLFdBQVc7SUFDWCxhQUFhO0lBQ2Isc0JBQXNCO0VBQ3hCO0VBQ0E7SUFDRSxXQUFXO0VBQ2I7RUFDQTtJQUNFLGdCQUFnQjtJQUNoQixhQUFhLEVBQUUsV0FBVztJQUMxQix1QkFBdUI7SUFDdkI7RUFDRjtFQUNBO0lBQ0UsWUFBWTtJQUNaLGVBQWU7SUFDZixzQkFBc0I7SUFDdEIsaUJBQWlCO0VBQ25CO0VBQ0E7SUFDRSxxQ0FBcUM7RUFDdkM7RUFDQTtJQUNFLFVBQVU7SUFDVixlQUFlO0VBQ2pCO0VBQ0E7SUFDRSx1QkFBdUI7RUFDekI7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQiIsImZpbGUiOiJzcmMvYXBwL2ZhY2lsaXR5LWh1Yi1jb25uZWN0b3IvZmFjaWxpdHktaHViLWNvbm5lY3Rvci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYXVkaW8ge1xyXG4gICAgd2lkdGg6IDkwJTtcclxuICB9XHJcbiAgdGFibGUge1xyXG4gICAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcclxuICB9XHJcbiAgdGgsIHRkIHtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkIGJsYWNrO1xyXG4gIH1cclxuICB0cjpob3ZlciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRjVGNUY1O1xyXG4gIH1cclxuICBkaXYuZ3JhcGgtY29udGFpbmVyIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgbWFyZ2luOiAwLjVlbTtcclxuICAgIHdpZHRoOiBjYWxjKDUwJSAtIDFlbSk7XHJcbiAgfVxyXG4gIGEjdmlld1NvdXJjZSB7XHJcbiAgICBjbGVhcjogYm90aDtcclxuICB9XHJcbiAgZGl2LnVzZXJzLWJveCB7XHJcbiAgICBtYXJnaW4tdG9wOiAxNXB4O1xyXG4gICAgaGVpZ2h0OiAxNTBweDsgd2lkdGg6IDEwMCU7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCBibGFjaztcclxuICAgIG92ZXJmbG93LXk6IHNjcm9sbFxyXG4gIH1cclxuICBkaXYudXNlci1ib3h7XHJcbiAgICBoZWlnaHQ6IDQwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG4gICAgbGluZS1oZWlnaHQ6IDQwcHg7XHJcbiAgfVxyXG4gIGRpdi51c2VyLWJveC5zZWxlY3RlZHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGRhcmtncmV5ICFpbXBvcnRhbnQ7XHJcbiAgfVxyXG4gIGRpdi51c2VyLWJveC5pbkNhbGwge1xyXG4gICAgY29sb3I6IHJlZDtcclxuICAgIGN1cnNvcjogZGVmYXVsdDtcclxuICB9XHJcbiAgZGl2LnVzZXItYm94Om50aC1jaGlsZChldmVuKXtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGJlaWdlO1xyXG4gIH1cclxuICAucm93IHtcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbiAgfSJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/facility-hub-connector/facility-hub-connector.component.html":
+/*!******************************************************************************!*\
+  !*** ./src/app/facility-hub-connector/facility-hub-connector.component.html ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h4 [hidden]=\"true\">\n  <!--No need for this-->\n  Connection Status: {{connectionStatus}}\n</h4>\n<div class=\"row\" [hidden]=\"true\">\n  <div class=\"col\">\n    <label for=\"nameInput\">Enter your name:</label>\n    <input class=\"form-control\" id=\"nameInput\" placeholder=\"Enter your name\" [(ngModel)]=\"nameInput\"\n      [disabled]=\"!nameInputEnabled\" (ngModelChange)=\"onNameInputChange($event)\" />\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col col-auto d-flex flex-column\">\n    <button class=\"btn btn-success\" id=\"connectToHubButton\" (click)=\"onConnectToHubClick($event)\"\n      [hidden]=\"!connectToHubEnabled\">Connect to Server</button>\n    <button class=\"btn btn-danger\" id=\"disconnectFromHubButton\" (click)=\"onDisconnectFromHubClick($event)\"\n      [hidden]=\"!disconnectFromHubEnabled\">Disconnect from Server</button>\n  </div>\n  <div class=\"col col-auto d-flex flex-column\">\n    <button class=\"btn btn-success\" id=\"connectToUserButton\" (click)=\"onConnectToUserClick($event)\"\n      [hidden]=\"!connectToUserEnabled || !allowConnectToUser\">Connect To User</button>\n    <button class=\"btn btn-danger\" id=\"disconnectFromUserButton\" (click)=\"onDisconnectFromUserClick($event)\"\n      [hidden]=\"!disconnectFromUserEnabled\">Disconnect From User\n    </button>\n  </div>\n</div>\n<h4 *ngIf=\"!connectedToUser\">Available Users:</h4>\n<div class=\"row\" *ngIf=\"!connectedToUser\">\n  <div class=\"col\">\n    <div id=\"users-list\" class=\"users-box\">\n      <div *ngFor=\"let user of connectedHubUsers\" class=\"user-box\" (click)=\"onUserClicked(user)\"\n        [class.selected]=\"selectedUser && selectedUser.connectionId == user.connectionId\">\n        <div *ngIf=\"!user.connectedToOtherUsers\">{{user.name}}</div>\n        <!--<div *ngIf=\"user.connectedToOtherUsers\">{{user.name}} (unavailable)</div>-->\n      </div>\n    </div>\n  </div>\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/facility-hub-connector/facility-hub-connector.component.ts":
+/*!****************************************************************************!*\
+  !*** ./src/app/facility-hub-connector/facility-hub-connector.component.ts ***!
+  \****************************************************************************/
+/*! exports provided: FacilityHubConnectorComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FacilityHubConnectorComponent", function() { return FacilityHubConnectorComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var _microsoft_signalr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @microsoft/signalr */ "./node_modules/@microsoft/signalr/dist/esm/index.js");
+/* harmony import */ var guid_typescript__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! guid-typescript */ "./node_modules/guid-typescript/dist/guid.js");
+/* harmony import */ var guid_typescript__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(guid_typescript__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+var FacilityHubConnectorComponent = /** @class */ (function () {
+    function FacilityHubConnectorComponent(toastr) {
+        this.toastr = toastr;
+        this.allowDeviceUserConnections = true;
+        this.allowWebUserConnections = true;
+        this.allowConnectToUser = true;
+        this.connected = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.disconnected = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.messageReceived = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.userConnected = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.userDisconnected = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+        this.localUser = null;
+        this.connectedUser = null;
+        //Ng Models
+        this.connectionStatus = '';
+        this.nameInput = '';
+        this.connectedHubUsers = [];
+        this.selectedUser = null;
+        //Button States
+        this.nameInputEnabled = true;
+        this.connectToHubEnabled = false;
+        this.disconnectFromHubEnabled = false;
+        this.connectToUserEnabled = false;
+        this.disconnectFromUserEnabled = false;
+    }
+    FacilityHubConnectorComponent.prototype.ngOnInit = function () {
+        this.establishHubConnection();
+    };
+    FacilityHubConnectorComponent.prototype.ngOnDestroy = function () {
+        this.terminateHubConnection();
+    };
+    FacilityHubConnectorComponent.prototype.establishHubConnection = function () {
+        var _this = this;
+        this.hubConnection = new _microsoft_signalr__WEBPACK_IMPORTED_MODULE_3__["HubConnectionBuilder"]()
+            .withUrl("https://localhost:5001/polar")
+            .configureLogging(_microsoft_signalr__WEBPACK_IMPORTED_MODULE_3__["LogLevel"].Information)
+            .build();
+        this.hubConnection.start().then(function () {
+            if (_this.nameInput) {
+                _this.nameInputEnabled = true;
+                _this.connectToHubEnabled = true;
+                _this.connectionStatus = "Awaiting name input and server connection.";
+            }
+        }).catch(function (err) {
+            _this.onError(err);
+        });
+        this.hubConnection.on("Connected", function (msg) { return _this.hubConnectionConnected(msg); });
+        this.hubConnection.on("MessageReceived", function (msg) { return _this.hubConnectionMessageReceived(msg); });
+        this.hubConnection.on("UsersUpdated", function (msg) { return _this.hubUsersUpdated(msg); });
+        this.hubConnection.on("UserConnected", function (msg) { return _this.hubConnectionUserConnected(msg); });
+        this.hubConnection.on("UserDisconnected", function (msg) { return _this.hubConnectionUserDisconnected(msg); });
+        this.hubConnection.onclose(function (err) {
+            if (_this.userConnected) {
+                _this.userDisconnected.emit(_this.connectedUser);
+            }
+            _this.hubConnection = null;
+            _this.connectedToHub = false;
+            _this.connectedToUser = false;
+            _this.selectedUser = null;
+            _this.connectedUser = null;
+            _this.localUser = null;
+            _this.connectedHubUsers = [];
+            _this.userConnectionInitiated = false;
+            _this.nameInputEnabled = false;
+            _this.connectToHubEnabled = false;
+            _this.disconnectFromHubEnabled = false;
+            _this.connectToUserEnabled = false;
+            _this.disconnectFromUserEnabled = false;
+            _this.disconnected.emit();
+            _this.connectionStatus = "Disconnected from server";
+        });
+        //this.nameInput = this.openIdConnectService.user.profile.name;
+        this.hubConnectionInitialized = true;
+    };
+    FacilityHubConnectorComponent.prototype.terminateHubConnection = function () {
+        this.disconnectFromHubEnabled = false;
+        if (this.hubConnectionInitialized) {
+            this.hubConnectionInitialized = false;
+            if (this.localUser != null && this.localUser.connectedToOtherUsers && this.connectedUser != null) {
+                var hubMessage = {
+                    to: this.connectedUser.connectionId,
+                    from: this.localUser,
+                    message: null
+                };
+                this.hubConnection.invoke("DisconnectFromUser", hubMessage);
+            }
+            this.hubConnection.stop();
+        }
+    };
+    FacilityHubConnectorComponent.prototype.hubConnectionConnected = function (hubMessage) {
+        var user = JSON.parse(hubMessage.message);
+        this.localUser = user;
+        this.connectedToHub = true;
+        this.disconnectFromHubEnabled = true;
+        this.connectionStatus = "Connected to server. Awaiting connection to user.";
+        this.connected.emit();
+    };
+    FacilityHubConnectorComponent.prototype.hubConnectionUserConnected = function (hubMessage) {
+        this.connectedUser = hubMessage.from;
+        this.connectedToUser = true;
+        this.userConnected.emit({ hubUser: hubMessage.from, userConnectionInitiated: this.userConnectionInitiated });
+        this.connectionStatus = "Connected to user: " + hubMessage.from.name;
+        this.selectedUser = null;
+        this.connectToUserEnabled = false;
+        this.disconnectFromUserEnabled = true;
+    };
+    FacilityHubConnectorComponent.prototype.hubConnectionUserDisconnected = function (hubMessage) {
+        this.connectedUser = null;
+        this.connectedToUser = false;
+        this.selectedUser = null;
+        this.userConnectionInitiated = false;
+        this.userDisconnected.emit(hubMessage.from);
+        this.connectionStatus = "Disconnected from user: " + hubMessage.from.name + ".";
+        this.disconnectFromUserEnabled = false;
+    };
+    FacilityHubConnectorComponent.prototype.hubUsersUpdated = function (users) {
+        var _this = this;
+        this.connectedHubUsers = [];
+        users.forEach(function (u) {
+            if (u.connectionId == _this.localUser.connectionId) {
+                _this.localUser = u;
+            }
+            else if (!u.connectedToOtherUsers) {
+                if (u.userOrigin == "Device" && _this.allowDeviceUserConnections) {
+                    _this.connectedHubUsers.push(u);
+                }
+                else if (u.userOrigin == "WebPortal" && _this.allowWebUserConnections) {
+                    _this.connectedHubUsers.push(u);
+                }
+            }
+        });
+    };
+    FacilityHubConnectorComponent.prototype.hubConnectionMessageReceived = function (hubMessage) {
+        this.messageReceived.emit(hubMessage);
+    };
+    FacilityHubConnectorComponent.prototype.onNameInputChange = function (ev) {
+        var _this = this;
+        if (this.nameInput && this.hubConnection.state === _microsoft_signalr__WEBPACK_IMPORTED_MODULE_3__["HubConnectionState"].Connected) {
+            if (this.connectedHubUsers.some(function (cu) { return cu.name == _this.nameInput && cu.userOrigin == "WebPortal"; })) {
+                this.connectToHubEnabled = false;
+            }
+            else {
+                this.connectToHubEnabled = true;
+            }
+        }
+        else {
+            this.connectToHubEnabled = false;
+        }
+    };
+    FacilityHubConnectorComponent.prototype.onConnectToHubClick = function (ev) {
+        var _this = this;
+        this.connectToHubEnabled = false;
+        this.nameInputEnabled = false;
+        this.hubConnection.invoke("ConnectWebPortalUser", this.nameInput, this.facilityId)
+            .catch(function (err) {
+            _this.onError(err);
+            _this.connectToHubEnabled = true;
+            _this.nameInputEnabled = true;
+        });
+    };
+    FacilityHubConnectorComponent.prototype.onDisconnectFromHubClick = function (ev) {
+        var _this = this;
+        this.terminateHubConnection();
+        window.setTimeout(function () {
+            _this.establishHubConnection();
+        }, 1000);
+    };
+    FacilityHubConnectorComponent.prototype.onConnectToUserClick = function (ev) {
+        var _this = this;
+        if (this.hubConnectionInitialized && this.localUser && this.selectedUser) {
+            this.userConnectionInitiated = true;
+            var hubMessage = {
+                to: this.selectedUser.connectionId,
+                from: this.localUser,
+                message: null
+            };
+            this.connectionStatus = "Connecting to user: " + this.selectedUser.name + "...";
+            this.hubConnection.invoke("ConnectToUser", hubMessage).then(function () {
+                _this.connectToUserEnabled = false;
+                _this.disconnectFromUserEnabled = true;
+            }).catch(function (err) {
+                _this.connectionStatus = "Connected to server. Awaiting connection to user.";
+                _this.connectToUserEnabled = true;
+                _this.disconnectFromUserEnabled = false;
+                _this.onError(err);
+            });
+        }
+    };
+    FacilityHubConnectorComponent.prototype.onDisconnectFromUserClick = function (ev) {
+        if (this.connectedToHub && this.connectedToUser) {
+            this.connectionStatus = "Disconnecting from user: " + this.connectedUser.name;
+            var hubMessage = {
+                to: this.connectedUser.connectionId,
+                from: this.localUser,
+                message: null
+            };
+            this.hubConnection.invoke("DisconnectFromUser", hubMessage);
+        }
+    };
+    FacilityHubConnectorComponent.prototype.onUserClicked = function (user) {
+        if (this.connectedToHub && !this.connectedToUser && !user.connectedToOtherUsers) {
+            this.selectedUser = user;
+            if (this.selectedUser != null) {
+                this.connectToUserEnabled = true;
+            }
+        }
+    };
+    FacilityHubConnectorComponent.prototype.onError = function (error) {
+        if (error.message.indexOf("HubException:") > 0) {
+            var errorMessage = error.message.split("HubException:")[1];
+            this.toastr.error(errorMessage, "Error!");
+        }
+        else {
+            this.toastr.error("An error occured while processing your request.", "Error!");
+        }
+    };
+    FacilityHubConnectorComponent.prototype.sendMessage = function (message) {
+        if (this.connectedToUser) {
+            var hubMessage = {
+                to: this.connectedUser.connectionId,
+                from: this.localUser,
+                message: JSON.stringify(message)
+            };
+            this.hubConnection.invoke("SendMessage", hubMessage);
+        }
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('hubEndpoint'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", String)
+    ], FacilityHubConnectorComponent.prototype, "hubEndpoint", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('facilityId'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", guid_typescript__WEBPACK_IMPORTED_MODULE_4__["Guid"])
+    ], FacilityHubConnectorComponent.prototype, "facilityId", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('allowDeviceUserConnections'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Boolean)
+    ], FacilityHubConnectorComponent.prototype, "allowDeviceUserConnections", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('allowWebUserConnections'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Boolean)
+    ], FacilityHubConnectorComponent.prototype, "allowWebUserConnections", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('allowConnectToUser'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Boolean)
+    ], FacilityHubConnectorComponent.prototype, "allowConnectToUser", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])('connected'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], FacilityHubConnectorComponent.prototype, "connected", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])('disconnected'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], FacilityHubConnectorComponent.prototype, "disconnected", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])('messageReceived'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], FacilityHubConnectorComponent.prototype, "messageReceived", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])('userConnected'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], FacilityHubConnectorComponent.prototype, "userConnected", void 0);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])('userDisconnected'),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], FacilityHubConnectorComponent.prototype, "userDisconnected", void 0);
+    FacilityHubConnectorComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'facility-hub-connector',
+            template: __webpack_require__(/*! ./facility-hub-connector.component.html */ "./src/app/facility-hub-connector/facility-hub-connector.component.html"),
+            styles: [__webpack_require__(/*! ./facility-hub-connector.component.css */ "./src/app/facility-hub-connector/facility-hub-connector.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [ngx_toastr__WEBPACK_IMPORTED_MODULE_2__["ToastrService"]])
+    ], FacilityHubConnectorComponent);
+    return FacilityHubConnectorComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/app/services/signal-r.service.ts":
 /*!**********************************************!*\
   !*** ./src/app/services/signal-r.service.ts ***!
@@ -285,9 +685,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var SignalRService = /** @class */ (function () {
-    function SignalRService(subject) {
+    function SignalRService() {
         var _this = this;
-        this.subject = subject;
         this.startConnection = function () {
             _this.hubConnection = new _microsoft_signalr__WEBPACK_IMPORTED_MODULE_2__["HubConnectionBuilder"]()
                 .withUrl('https://localhost:5001/polar')
@@ -302,19 +701,11 @@ var SignalRService = /** @class */ (function () {
         };
         this.addTransferListener = function () {
             _this.hubConnection.on('HeartRateReceived', function (data) {
-                _this.data = data;
                 console.log(data);
             });
         };
-        this.send = function () {
-            var iteration = 0;
-            var intervalHandle = setInterval(function () {
-                iteration++;
-                _this.subject.next(iteration.toString());
-                if (iteration === 10) {
-                    clearInterval(intervalHandle);
-                }
-            }, 500);
+        this.send = function (polarModel) {
+            _this.subject.next(polarModel);
         };
     }
     SignalRService.prototype.openStream = function () {
@@ -327,7 +718,7 @@ var SignalRService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
             providedIn: 'root'
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [Object])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
     ], SignalRService);
     return SignalRService;
 }());
@@ -397,7 +788,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\Dev\Angular\angular-sandbox\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! F:\dev\angular\angular-sandbox\src\main.ts */"./src/main.ts");
 
 
 /***/ })

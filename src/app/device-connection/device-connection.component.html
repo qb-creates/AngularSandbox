@@ -1,0 +1,4 @@
+<facility-hub-connector [hubEndpoint]="hubEndpoint" [facilityId]="facilityId" [allowDeviceUserConnections]="true"
+  [allowWebUserConnections]="false" [allowConnectToUser]="connectToUserEnabled"
+  (messageReceived)="onMessageReceived($event)" (connected)="onConnected()" (userConnected)="onUserConnected($event)"
+  (userDisconnected)="onUserDisconnected()" (disconnected)="onDisconnected()"></facility-hub-connector>

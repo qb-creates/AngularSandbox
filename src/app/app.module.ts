@@ -5,16 +5,24 @@ import {HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BluetoothListingComponent } from './bluetooth-listing/bluetooth-listing.component';
-
+import { FacilityHubConnectorComponent } from './facility-hub-connector/facility-hub-connector.component';
+​import { FormsModule } from '@angular/forms';
+import { DeviceConnectionComponent } from './device-connection/device-connection.component';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
-    BluetoothListingComponent
+    BluetoothListingComponent,
+    FacilityHubConnectorComponent,
+    DeviceConnectionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     //NgChartsModule,
+    BrowserModule, 
+    FormsModule,
+    ToastrModule.forRoot(),
     HttpClientModule
   ],
   providers: [],
