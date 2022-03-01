@@ -14,7 +14,7 @@ import { Console } from 'console';
 })
 export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
   @Input('hubEndpoint') hubEndpoint: string;
-  @Input('facilityId') facilityId: Guid;
+  @Input('facilityId') facilityId: Guid = Guid.create();
   @Input('allowDeviceUserConnections') allowDeviceUserConnections: boolean = true;
   @Input('allowWebUserConnections') allowWebUserConnections: boolean = true;
   @Input('allowConnectToUser') allowConnectToUser: boolean = true;
@@ -80,6 +80,9 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
       .build();
 ​
     this.hubConnection.start().then(() => {
+      this.nameInput = "Quentin Baker";
+      this.facilityId = Guid.create();
+      console.log(this.facilityId);
       if (this.nameInput) {
         this.nameInputEnabled = true;
         this.connectToHubEnabled = true;
@@ -90,9 +93,9 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
     });
 ​
     this.hubConnection.on("Connected", (msg: HubMessage) => this.hubConnectionConnected(msg));
+    this.hubConnection.on("UserConnected", (msg: HubMessage) => this.hubConnectionUserConnected(msg));
     this.hubConnection.on("MessageReceived", (msg: HubMessage) => this.hubConnectionMessageReceived(msg));
     this.hubConnection.on("UsersUpdated", (msg: HubUser[]) => this.hubUsersUpdated(msg));
-    this.hubConnection.on("UserConnected", (msg: HubMessage) => this.hubConnectionUserConnected(msg));
     this.hubConnection.on("UserDisconnected", (msg: HubMessage) => this.hubConnectionUserDisconnected(msg));
 ​
     this.hubConnection.onclose((err: Error) => {
@@ -147,10 +150,12 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
   }
 ​
   hubConnectionConnected(hubMessage: HubMessage): void {
+    
     const user = JSON.parse(hubMessage.message) as HubUser;
     this.localUser = user;
     this.connectedToHub = true;
     this.disconnectFromHubEnabled = true;
+    console.log("Connected to server. Awaiting connection to user.");
     this.connectionStatus = "Connected to server. Awaiting connection to user.";
     this.connected.emit();
   }
@@ -184,20 +189,24 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
   hubUsersUpdated(users: HubUser[]) {
     console.log("Users updated");
     this.connectedHubUsers = [];
-​
+​ 
     users.forEach(u => {
+      console.log(u.connectionId);
+      console.log(this.localUser.connectionId);
+      console.log(u.userOrigin);
       if (u.connectionId == this.localUser.connectionId) {
         this.localUser = u;
       }
       else if (!u.connectedToOtherUsers) {
-        if (u.userOrigin == "Device" && this.allowDeviceUserConnections) {
+        if (u.userOrigin == "WebPortal" && this.allowDeviceUserConnections) {
           this.connectedHubUsers.push(u);
-        } else if (u.userOrigin == "WebPortal" && this.allowWebUserConnections) {
+          console.log("Device");
+        } else if (u.userOrigin == "Device" && this.allowWebUserConnections) {
           this.connectedHubUsers.push(u);
+          console.log("WebPortal");
         }
       }
     });
-    //this.connectedHubUsers.push(this.localUser);
   }
 ​
   hubConnectionMessageReceived(hubMessage: HubMessage) {
@@ -219,8 +228,8 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
   onConnectToHubClick(ev: any) {
     this.connectToHubEnabled = false;
     this.nameInputEnabled = false;
-​
-    this.hubConnection.invoke("ConnectWebPortalUser", this.nameInput, this.facilityId)
+​    console.log("New test");
+    this.hubConnection.invoke("ConnectWebPortalUser", this.nameInput, this.facilityId.toString())
       .catch((err) => {
         this.onError(err);
         this.connectToHubEnabled = true;

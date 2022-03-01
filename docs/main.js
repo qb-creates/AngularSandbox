@@ -23,6 +23,25 @@ webpackEmptyAsyncContext.id = "./src/$$_lazy_route_resource lazy recursive";
 
 /***/ }),
 
+/***/ "./src/app/_interfaces/HubUser.ts":
+/*!****************************************!*\
+  !*** ./src/app/_interfaces/HubUser.ts ***!
+  \****************************************/
+/*! exports provided: UserOrigin */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserOrigin", function() { return UserOrigin; });
+var UserOrigin;
+(function (UserOrigin) {
+    UserOrigin["WebPortal"] = "WebPortal";
+    UserOrigin["Device"] = "Device";
+})(UserOrigin || (UserOrigin = {}));
+
+
+/***/ }),
+
 /***/ "./src/app/app-routing.module.ts":
 /*!***************************************!*\
   !*** ./src/app/app-routing.module.ts ***!
@@ -74,7 +93,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<app-device-connection></app-device-connection>\n<router-outlet></router-outlet>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<app-device-connection></app-device-connection>\r\n<router-outlet></router-outlet>\r\n"
 
 /***/ }),
 
@@ -133,10 +152,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _facility_hub_connector_facility_hub_connector_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./facility-hub-connector/facility-hub-connector.component */ "./src/app/facility-hub-connector/facility-hub-connector.component.ts");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _device_connection_device_connection_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./device-connection/device-connection.component */ "./src/app/device-connection/device-connection.component.ts");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 
 
 
 //import {NgChartsModule} from 'ng2-charts';
+
 
 
 
@@ -161,6 +182,7 @@ var AppModule = /** @class */ (function () {
                 //NgChartsModule,
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
+                ngx_toastr__WEBPACK_IMPORTED_MODULE_10__["ToastrModule"].forRoot(),
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
             ],
             providers: [],
@@ -231,7 +253,7 @@ var BluetoothListingComponent = /** @class */ (function () {
         this.signalRService.addTransferListener();
     };
     BluetoothListingComponent.prototype.SignalRSend = function () {
-        this.signalRService.send(this.polarModel);
+        this.signalRService.send2(this.polarModel);
     };
     BluetoothListingComponent.prototype.SignalRCloseStream = function () {
         this.signalRService.closeStream();
@@ -296,7 +318,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<facility-hub-connector [hubEndpoint]=\"hubEndpoint\" [facilityId]=\"facilityId\" [allowDeviceUserConnections]=\"true\"\n  [allowWebUserConnections]=\"false\" [allowConnectToUser]=\"connectToUserEnabled\"\n  (messageReceived)=\"onMessageReceived($event)\" (connected)=\"onConnected()\" (userConnected)=\"onUserConnected($event)\"\n  (userDisconnected)=\"onUserDisconnected()\" (disconnected)=\"onDisconnected()\"></facility-hub-connector>"
+module.exports = "<facility-hub-connector [hubEndpoint]=\"hubEndpoint\" [facilityId]=\"facilityId\" [allowDeviceUserConnections]=\"true\"\r\n  [allowWebUserConnections]=\"false\" [allowConnectToUser]=\"connectToUserEnabled\"\r\n  (messageReceived)=\"onMessageReceived($event)\" (connected)=\"onConnected()\" (userConnected)=\"onUserConnected($event)\"\r\n  (userDisconnected)=\"onUserDisconnected()\" (disconnected)=\"onDisconnected()\"></facility-hub-connector>"
 
 /***/ }),
 
@@ -316,6 +338,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var DeviceConnectionComponent = /** @class */ (function () {
     function DeviceConnectionComponent() {
+        this.hubEndpoint = "sdfdf";
+        this.connectToUserEnabled = false;
     }
     DeviceConnectionComponent.prototype.ngOnInit = function () {
     };
@@ -362,7 +386,7 @@ module.exports = "audio {\r\n    width: 90%;\r\n  }\r\n  table {\r\n    border-c
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h4 [hidden]=\"true\">\n  <!--No need for this-->\n  Connection Status: {{connectionStatus}}\n</h4>\n<div class=\"row\" [hidden]=\"true\">\n  <div class=\"col\">\n    <label for=\"nameInput\">Enter your name:</label>\n    <input class=\"form-control\" id=\"nameInput\" placeholder=\"Enter your name\" [(ngModel)]=\"nameInput\"\n      [disabled]=\"!nameInputEnabled\" (ngModelChange)=\"onNameInputChange($event)\" />\n  </div>\n</div>\n<div class=\"row\">\n  <div class=\"col col-auto d-flex flex-column\">\n    <button class=\"btn btn-success\" id=\"connectToHubButton\" (click)=\"onConnectToHubClick($event)\"\n      [hidden]=\"!connectToHubEnabled\">Connect to Server</button>\n    <button class=\"btn btn-danger\" id=\"disconnectFromHubButton\" (click)=\"onDisconnectFromHubClick($event)\"\n      [hidden]=\"!disconnectFromHubEnabled\">Disconnect from Server</button>\n  </div>\n  <div class=\"col col-auto d-flex flex-column\">\n    <button class=\"btn btn-success\" id=\"connectToUserButton\" (click)=\"onConnectToUserClick($event)\"\n      [hidden]=\"!connectToUserEnabled || !allowConnectToUser\">Connect To User</button>\n    <button class=\"btn btn-danger\" id=\"disconnectFromUserButton\" (click)=\"onDisconnectFromUserClick($event)\"\n      [hidden]=\"!disconnectFromUserEnabled\">Disconnect From User\n    </button>\n  </div>\n</div>\n<h4 *ngIf=\"!connectedToUser\">Available Users:</h4>\n<div class=\"row\" *ngIf=\"!connectedToUser\">\n  <div class=\"col\">\n    <div id=\"users-list\" class=\"users-box\">\n      <div *ngFor=\"let user of connectedHubUsers\" class=\"user-box\" (click)=\"onUserClicked(user)\"\n        [class.selected]=\"selectedUser && selectedUser.connectionId == user.connectionId\">\n        <div *ngIf=\"!user.connectedToOtherUsers\">{{user.name}}</div>\n        <!--<div *ngIf=\"user.connectedToOtherUsers\">{{user.name}} (unavailable)</div>-->\n      </div>\n    </div>\n  </div>\n</div>\n"
+module.exports = "<h4 [hidden]=\"true\">\r\n  <!--No need for this-->\r\n  Connection Status: {{connectionStatus}}\r\n</h4>\r\n<div class=\"row\" [hidden]=\"true\">\r\n  <div class=\"col\">\r\n    <label for=\"nameInput\">Enter your name:</label>\r\n    <input class=\"form-control\" id=\"nameInput\" placeholder=\"Enter your name\" [(ngModel)]=\"nameInput\"\r\n      [disabled]=\"!nameInputEnabled\" (ngModelChange)=\"onNameInputChange($event)\" />\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col col-auto d-flex flex-column\">\r\n    <button class=\"btn btn-success\" id=\"connectToHubButton\" (click)=\"onConnectToHubClick($event)\"\r\n      [hidden]=\"!connectToHubEnabled\">Connect to Server</button>\r\n    <button class=\"btn btn-danger\" id=\"disconnectFromHubButton\" (click)=\"onDisconnectFromHubClick($event)\"\r\n      [hidden]=\"!disconnectFromHubEnabled\">Disconnect from Server</button>\r\n  </div>\r\n  <div class=\"col col-auto d-flex flex-column\">\r\n    <button class=\"btn btn-success\" id=\"connectToUserButton\" (click)=\"onConnectToUserClick($event)\"\r\n      [hidden]=\"!connectToUserEnabled || !allowConnectToUser\">Connect To User</button>\r\n    <button class=\"btn btn-danger\" id=\"disconnectFromUserButton\" (click)=\"onDisconnectFromUserClick($event)\"\r\n      [hidden]=\"!disconnectFromUserEnabled\">Disconnect From User\r\n    </button>\r\n  </div>\r\n</div>\r\n<h4 *ngIf=\"!connectedToUser\" style=\"color: white; font-size: 25px;\">Available Users:</h4>\r\n<div class=\"row\" *ngIf=\"!connectedToUser\">\r\n  <div class=\"col\">\r\n    <div id=\"users-list\" class=\"users-box\">\r\n      <div *ngFor=\"let user of connectedHubUsers\" class=\"user-box\" (click)=\"onUserClicked(user)\"\r\n        [class.selected]=\"selectedUser && selectedUser.connectionId == user.connectionId\">\r\n        <div *ngIf=\"!user.connectedToOtherUsers\">{{user.name}}</div>\r\n        <!--<div *ngIf=\"user.connectedToOtherUsers\">{{user.name}} (unavailable)</div>-->\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -380,11 +404,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 /* harmony import */ var _microsoft_signalr__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @microsoft/signalr */ "./node_modules/@microsoft/signalr/dist/esm/index.js");
-/* harmony import */ var guid_typescript__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! guid-typescript */ "./node_modules/guid-typescript/dist/guid.js");
-/* harmony import */ var guid_typescript__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(guid_typescript__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _interfaces_HubUser__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../_interfaces/HubUser */ "./src/app/_interfaces/HubUser.ts");
+/* harmony import */ var guid_typescript__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! guid-typescript */ "./node_modules/guid-typescript/dist/guid.js");
+/* harmony import */ var guid_typescript__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(guid_typescript__WEBPACK_IMPORTED_MODULE_5__);
 
 
 
+
+//import { environment } from '../../../../../environments/environment';
+//import { OpenIdConnectService } from '../../../../core/open-id-connect/open-id-connect.service';
 
 
 var FacilityHubConnectorComponent = /** @class */ (function () {
@@ -398,7 +426,19 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
         this.messageReceived = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.userConnected = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
         this.userDisconnected = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
-        this.localUser = null;
+        this.localUser = {
+            connectionId: "123456",
+            groupId: "123456",
+            name: "Quentin",
+            deviceId: guid_typescript__WEBPACK_IMPORTED_MODULE_5__["Guid"].create(),
+            deviceName: "Waya Test Device",
+            facilityId: guid_typescript__WEBPACK_IMPORTED_MODULE_5__["Guid"].create(),
+            facilityName: "Wellovate",
+            connectedToOtherUsers: false,
+            connectedUserIds: ["4321"],
+            userOrigin: _interfaces_HubUser__WEBPACK_IMPORTED_MODULE_4__["UserOrigin"].Device,
+            sessionId: guid_typescript__WEBPACK_IMPORTED_MODULE_5__["Guid"].create()
+        };
         this.connectedUser = null;
         //Ng Models
         this.connectionStatus = '';
@@ -504,6 +544,7 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
     };
     FacilityHubConnectorComponent.prototype.hubUsersUpdated = function (users) {
         var _this = this;
+        console.log("Users updated");
         this.connectedHubUsers = [];
         users.forEach(function (u) {
             if (u.connectionId == _this.localUser.connectionId) {
@@ -518,6 +559,7 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
                 }
             }
         });
+        //this.connectedHubUsers.push(this.localUser);
     };
     FacilityHubConnectorComponent.prototype.hubConnectionMessageReceived = function (hubMessage) {
         this.messageReceived.emit(hubMessage);
@@ -619,7 +661,7 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
     ], FacilityHubConnectorComponent.prototype, "hubEndpoint", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('facilityId'),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", guid_typescript__WEBPACK_IMPORTED_MODULE_4__["Guid"])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", guid_typescript__WEBPACK_IMPORTED_MODULE_5__["Guid"])
     ], FacilityHubConnectorComponent.prototype, "facilityId", void 0);
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])('allowDeviceUserConnections'),
@@ -707,6 +749,9 @@ var SignalRService = /** @class */ (function () {
         this.send = function (polarModel) {
             _this.subject.next(polarModel);
         };
+        this.send2 = function (polarModel) {
+            _this.hubConnection.send("UpdateHeartRate", polarModel);
+        };
     }
     SignalRService.prototype.openStream = function () {
         this.hubConnection.send("UploadStream", this.subject);
@@ -788,7 +833,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\dev\angular\angular-sandbox\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Crestron\Angular\AngularSandbox\src\main.ts */"./src/main.ts");
 
 
 /***/ })

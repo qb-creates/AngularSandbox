@@ -9,7 +9,7 @@ export interface HubUser {
   facilityName: string;
   connectedToOtherUsers: boolean;
   connectedUserIds: string[];
-  userOrigin: UserOrigin;
+  userOrigin: string;
   sessionId?: Guid;
 }
 export enum UserOrigin {

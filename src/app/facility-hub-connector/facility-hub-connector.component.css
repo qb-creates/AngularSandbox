@@ -38,7 +38,7 @@ audio {
     cursor: default;
   }
   div.user-box:nth-child(even){
-    background-color: beige;
+    background-color: rgb(220, 245, 241);
   }
   .row {
     margin-bottom: 10px;

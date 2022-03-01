@@ -30,7 +30,9 @@
     <div id="users-list" class="users-box">
       <div *ngFor="let user of connectedHubUsers" class="user-box" (click)="onUserClicked(user)"
         [class.selected]="selectedUser && selectedUser.connectionId == user.connectionId">
-        <div *ngIf="!user.connectedToOtherUsers">{{user.name}}</div>
+        <div *ngIf="!user.connectedToOtherUsers">
+          <p style="color: white; font-size: 25px;">{{user.name}}</p>
+        </div>
         <!--<div *ngIf="user.connectedToOtherUsers">{{user.name}} (unavailable)</div>-->
       </div>
     </div>

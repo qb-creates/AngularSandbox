@@ -9,6 +9,7 @@ import { FacilityHubConnectorComponent } from './facility-hub-connector/facility
 ​import { FormsModule } from '@angular/forms';
 import { DeviceConnectionComponent } from './device-connection/device-connection.component';
 import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +20,7 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    //NgChartsModule,
+    BrowserAnimationsModule,
     BrowserModule, 
     FormsModule,
     ToastrModule.forRoot(),
