@@ -14,7 +14,7 @@ import { Console } from 'console';
 })
 export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
   @Input('hubEndpoint') hubEndpoint: string;
-  @Input('facilityId') facilityId: Guid = Guid.create();
+  @Input('facilityId') facilityId: Guid;
   @Input('allowDeviceUserConnections') allowDeviceUserConnections: boolean = true;
   @Input('allowWebUserConnections') allowWebUserConnections: boolean = true;
   @Input('allowConnectToUser') allowConnectToUser: boolean = true;
@@ -81,7 +81,7 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
 ​
     this.hubConnection.start().then(() => {
       this.nameInput = "Quentin Baker";
-      this.facilityId = Guid.create();
+      this.facilityId = Guid.parse("5d033f7a-2118-4db8-b16c-ebf9599c4634"); // ==> b77d409a-10cd-4a47-8e94-b0cd0ab50aa1
       console.log(this.facilityId);
       if (this.nameInput) {
         this.nameInputEnabled = true;
@@ -150,12 +150,11 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
   }
 ​
   hubConnectionConnected(hubMessage: HubMessage): void {
-    
+    console.log("Ran Connected");
     const user = JSON.parse(hubMessage.message) as HubUser;
     this.localUser = user;
     this.connectedToHub = true;
     this.disconnectFromHubEnabled = true;
-    console.log("Connected to server. Awaiting connection to user.");
     this.connectionStatus = "Connected to server. Awaiting connection to user.";
     this.connected.emit();
   }
@@ -171,6 +170,7 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
     this.selectedUser = null;
     this.connectToUserEnabled = false;
     this.disconnectFromUserEnabled = true;
+    console.log("Connected to user: " + hubMessage.from.name);
   }
 ​
   hubConnectionUserDisconnected(hubMessage: HubMessage): void {
@@ -191,20 +191,21 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
     this.connectedHubUsers = [];
 ​ 
     users.forEach(u => {
-      console.log(u.connectionId);
-      console.log(this.localUser.connectionId);
-      console.log(u.userOrigin);
       if (u.connectionId == this.localUser.connectionId) {
         this.localUser = u;
       }
       else if (!u.connectedToOtherUsers) {
+        if (this.allowDeviceUserConnections) {
+          this.connectedHubUsers.push(u);
+        }
+        /*
         if (u.userOrigin == "WebPortal" && this.allowDeviceUserConnections) {
           this.connectedHubUsers.push(u);
           console.log("Device");
         } else if (u.userOrigin == "Device" && this.allowWebUserConnections) {
           this.connectedHubUsers.push(u);
           console.log("WebPortal");
-        }
+        }*/
       }
     });
   }
@@ -228,7 +229,6 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
   onConnectToHubClick(ev: any) {
     this.connectToHubEnabled = false;
     this.nameInputEnabled = false;
-​    console.log("New test");
     this.hubConnection.invoke("ConnectWebPortalUser", this.nameInput, this.facilityId.toString())
       .catch((err) => {
         this.onError(err);
@@ -283,8 +283,8 @@ export class FacilityHubConnectorComponent implements OnInit, OnDestroy {
   onUserClicked(user: HubUser) {
     if (this.connectedToHub && !this.connectedToUser && !user.connectedToOtherUsers) {
       this.selectedUser = user;
-​
-      if (this.selectedUser != null) {
+      
+      if (this.selectedUser != null) {     
         this.connectToUserEnabled = true;
       }
     }
