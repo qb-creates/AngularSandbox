@@ -93,7 +93,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n<app-device-connection></app-device-connection>\r\n<router-outlet></router-outlet>\r\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<app-device-connection></app-device-connection>\n<app-bluetooth-listing></app-bluetooth-listing>\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -153,10 +153,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _device_connection_device_connection_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./device-connection/device-connection.component */ "./src/app/device-connection/device-connection.component.ts");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
 
 
 
 //import {NgChartsModule} from 'ng2-charts';
+
 
 
 
@@ -179,7 +181,7 @@ var AppModule = /** @class */ (function () {
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_4__["AppRoutingModule"],
-                //NgChartsModule,
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__["BrowserAnimationsModule"],
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
                 ngx_toastr__WEBPACK_IMPORTED_MODULE_10__["ToastrModule"].forRoot(),
@@ -203,7 +205,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "#comHeader{\r\n    color: whitesmoke;\r\n    font-size:60px;\r\n    margin: 0;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYmx1ZXRvb3RoLWxpc3RpbmcvYmx1ZXRvb3RoLWxpc3RpbmcuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGlCQUFpQjtJQUNqQixjQUFjO0lBQ2QsU0FBUztBQUNiIiwiZmlsZSI6InNyYy9hcHAvYmx1ZXRvb3RoLWxpc3RpbmcvYmx1ZXRvb3RoLWxpc3RpbmcuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIiNjb21IZWFkZXJ7XHJcbiAgICBjb2xvcjogd2hpdGVzbW9rZTtcclxuICAgIGZvbnQtc2l6ZTo2MHB4O1xyXG4gICAgbWFyZ2luOiAwO1xyXG59Il19 */"
+module.exports = "@-webkit-keyframes test{\r\n    from {\r\n      width: 100px;\r\n    } \r\n    to {\r\n        width:300px;\r\n    }\r\n}\r\n@keyframes test{\r\n    from {\r\n      width: 100px;\r\n    } \r\n    to {\r\n        width:300px;\r\n    }\r\n}\r\n#comHeader{\r\n    color: whitesmoke;\r\n    font-size:60px;\r\n    margin: 0;\r\n}\r\ndiv {\r\n    width: 100px;\r\n    height: 100px;\r\n    background: red;\r\n    -webkit-animation-name:test;\r\n            animation-name:test;\r\n    -webkit-animation-duration:1s;\r\n            animation-duration:1s;\r\n  }\r\ndiv:hover {\r\n    width: 300px;\r\n  }\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYmx1ZXRvb3RoLWxpc3RpbmcvYmx1ZXRvb3RoLWxpc3RpbmcuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJO01BQ0UsWUFBWTtJQUNkO0lBQ0E7UUFDSSxXQUFXO0lBQ2Y7QUFDSjtBQVBBO0lBQ0k7TUFDRSxZQUFZO0lBQ2Q7SUFDQTtRQUNJLFdBQVc7SUFDZjtBQUNKO0FBQ0E7SUFDSSxpQkFBaUI7SUFDakIsY0FBYztJQUNkLFNBQVM7QUFDYjtBQUNBO0lBQ0ksWUFBWTtJQUNaLGFBQWE7SUFDYixlQUFlO0lBQ2YsMkJBQW1CO1lBQW5CLG1CQUFtQjtJQUNuQiw2QkFBcUI7WUFBckIscUJBQXFCO0VBQ3ZCO0FBRUE7SUFDRSxZQUFZO0VBQ2QiLCJmaWxlIjoic3JjL2FwcC9ibHVldG9vdGgtbGlzdGluZy9ibHVldG9vdGgtbGlzdGluZy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGtleWZyYW1lcyB0ZXN0e1xyXG4gICAgZnJvbSB7XHJcbiAgICAgIHdpZHRoOiAxMDBweDtcclxuICAgIH0gXHJcbiAgICB0byB7XHJcbiAgICAgICAgd2lkdGg6MzAwcHg7XHJcbiAgICB9XHJcbn1cclxuI2NvbUhlYWRlcntcclxuICAgIGNvbG9yOiB3aGl0ZXNtb2tlO1xyXG4gICAgZm9udC1zaXplOjYwcHg7XHJcbiAgICBtYXJnaW46IDA7XHJcbn1cclxuZGl2IHtcclxuICAgIHdpZHRoOiAxMDBweDtcclxuICAgIGhlaWdodDogMTAwcHg7XHJcbiAgICBiYWNrZ3JvdW5kOiByZWQ7XHJcbiAgICBhbmltYXRpb24tbmFtZTp0ZXN0O1xyXG4gICAgYW5pbWF0aW9uLWR1cmF0aW9uOjFzO1xyXG4gIH1cclxuICBcclxuICBkaXY6aG92ZXIge1xyXG4gICAgd2lkdGg6IDMwMHB4O1xyXG4gIH1cclxuIl19 */"
 
 /***/ }),
 
@@ -214,7 +216,7 @@ module.exports = "#comHeader{\r\n    color: whitesmoke;\r\n    font-size:60px;\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h1 id=\"comHeader\">E3K Heart Rate</h1>\r\n<button (click)=\"SearchBluetooth()\">Search BLE</button>\r\n\r\n<button (click)=\"SignalRSend()\">Signal-r Send</button>\r\n\r\n<button (click)=\"SignalRCloseStream()\">Signal-r Close</button>\r\n\r\n\r\n"
+module.exports = "\r\n<h1 id=\"comHeader\">E3K Heart Rate</h1>\r\n<button (click)=\"SearchBluetooth()\">Search BLE</button>\r\n\r\n<button (click)=\"SignalRSend()\">Signal-r Send</button>\r\n\r\n<button (click)=\"SignalRCloseStream()\">Signal-r Close</button>\r\n\r\n<div style=\"width:100px; height:100px; background-color:red;\">\r\n\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -318,7 +320,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<facility-hub-connector [hubEndpoint]=\"hubEndpoint\" [facilityId]=\"facilityId\" [allowDeviceUserConnections]=\"true\"\r\n  [allowWebUserConnections]=\"false\" [allowConnectToUser]=\"connectToUserEnabled\"\r\n  (messageReceived)=\"onMessageReceived($event)\" (connected)=\"onConnected()\" (userConnected)=\"onUserConnected($event)\"\r\n  (userDisconnected)=\"onUserDisconnected()\" (disconnected)=\"onDisconnected()\"></facility-hub-connector>"
+module.exports = "<facility-hub-connector [hubEndpoint]=\"hubEndpoint\" [facilityId]=\"facilityId\" [allowDeviceUserConnections]=\"true\"\n  [allowWebUserConnections]=\"false\" [allowConnectToUser]=\"connectToUserEnabled\"\n  (messageReceived)=\"onMessageReceived($event)\" (connected)=\"onConnected()\" (userConnected)=\"onUserConnected($event)\"\n  (userDisconnected)=\"onUserDisconnected()\" (disconnected)=\"onDisconnected()\"></facility-hub-connector>"
 
 /***/ }),
 
@@ -334,12 +336,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeviceConnectionComponent", function() { return DeviceConnectionComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _services_signal_r_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/signal-r.service */ "./src/app/services/signal-r.service.ts");
+
 
 
 var DeviceConnectionComponent = /** @class */ (function () {
-    function DeviceConnectionComponent() {
+    function DeviceConnectionComponent(signalRService) {
+        this.signalRService = signalRService;
+        this.polarModel = {
+            heartRate: 60,
+            rrInterval: 900
+        };
+        this.options = {
+            filters: [
+                { services: ['heart_rate'] },
+                { services: [0x1802, 0x1803] },
+            ]
+        };
         this.hubEndpoint = "sdfdf";
-        this.connectToUserEnabled = false;
+        this.connectToUserEnabled = true;
     }
     DeviceConnectionComponent.prototype.ngOnInit = function () {
     };
@@ -348,6 +363,34 @@ var DeviceConnectionComponent = /** @class */ (function () {
     DeviceConnectionComponent.prototype.onConnected = function () {
     };
     DeviceConnectionComponent.prototype.onUserConnected = function () {
+        var _this = this;
+        this.signalRService.startConnection();
+        this.signalRService.addTransferListener();
+        return navigator.bluetooth.requestDevice(this.options)
+            .then(function (device) {
+            return device.gatt.connect();
+        })
+            .then(function (server) {
+            return server.getPrimaryService('heart_rate');
+        })
+            .then(function (service) {
+            return service.getCharacteristic('heart_rate_measurement');
+        })
+            .then(function (characteristic) {
+            characteristic.startNotifications().then(function () {
+                characteristic.addEventListener('characteristicvaluechanged', function () {
+                    if (characteristic.value) {
+                        _this.polarModel.heartRate = characteristic.value.getUint8(0);
+                        _this.polarModel.rrInterval = Math.round(60000 / characteristic.value.getUint8(0));
+                        _this.signalRService.send(_this.polarModel);
+                    }
+                });
+            });
+        })
+            .catch(function (error) {
+            _this.signalRService.closeStream();
+            console.log('Argh!! ' + error);
+        });
     };
     DeviceConnectionComponent.prototype.onUserDisconnected = function () {
     };
@@ -359,7 +402,7 @@ var DeviceConnectionComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./device-connection.component.html */ "./src/app/device-connection/device-connection.component.html"),
             styles: [__webpack_require__(/*! ./device-connection.component.css */ "./src/app/device-connection/device-connection.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_services_signal_r_service__WEBPACK_IMPORTED_MODULE_2__["SignalRService"]])
     ], DeviceConnectionComponent);
     return DeviceConnectionComponent;
 }());
@@ -375,7 +418,7 @@ var DeviceConnectionComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "audio {\r\n    width: 90%;\r\n  }\r\n  table {\r\n    border-collapse: collapse;\r\n  }\r\n  th, td {\r\n    border: 1px solid black;\r\n  }\r\n  tr:hover {\r\n    background-color: #F5F5F5;\r\n  }\r\n  div.graph-container {\r\n    float: left;\r\n    margin: 0.5em;\r\n    width: calc(50% - 1em);\r\n  }\r\n  a#viewSource {\r\n    clear: both;\r\n  }\r\n  div.users-box {\r\n    margin-top: 15px;\r\n    height: 150px; width: 100%;\r\n    border: 2px solid black;\r\n    overflow-y: scroll\r\n  }\r\n  div.user-box{\r\n    height: 40px;\r\n    cursor: pointer;\r\n    vertical-align: middle;\r\n    line-height: 40px;\r\n  }\r\n  div.user-box.selected{\r\n    background-color: darkgrey !important;\r\n  }\r\n  div.user-box.inCall {\r\n    color: red;\r\n    cursor: default;\r\n  }\r\n  div.user-box:nth-child(even){\r\n    background-color: beige;\r\n  }\r\n  .row {\r\n    margin-bottom: 10px;\r\n  }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmFjaWxpdHktaHViLWNvbm5lY3Rvci9mYWNpbGl0eS1odWItY29ubmVjdG9yLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxVQUFVO0VBQ1o7RUFDQTtJQUNFLHlCQUF5QjtFQUMzQjtFQUNBO0lBQ0UsdUJBQXVCO0VBQ3pCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLFdBQVc7SUFDWCxhQUFhO0lBQ2Isc0JBQXNCO0VBQ3hCO0VBQ0E7SUFDRSxXQUFXO0VBQ2I7RUFDQTtJQUNFLGdCQUFnQjtJQUNoQixhQUFhLEVBQUUsV0FBVztJQUMxQix1QkFBdUI7SUFDdkI7RUFDRjtFQUNBO0lBQ0UsWUFBWTtJQUNaLGVBQWU7SUFDZixzQkFBc0I7SUFDdEIsaUJBQWlCO0VBQ25CO0VBQ0E7SUFDRSxxQ0FBcUM7RUFDdkM7RUFDQTtJQUNFLFVBQVU7SUFDVixlQUFlO0VBQ2pCO0VBQ0E7SUFDRSx1QkFBdUI7RUFDekI7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQiIsImZpbGUiOiJzcmMvYXBwL2ZhY2lsaXR5LWh1Yi1jb25uZWN0b3IvZmFjaWxpdHktaHViLWNvbm5lY3Rvci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYXVkaW8ge1xyXG4gICAgd2lkdGg6IDkwJTtcclxuICB9XHJcbiAgdGFibGUge1xyXG4gICAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcclxuICB9XHJcbiAgdGgsIHRkIHtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkIGJsYWNrO1xyXG4gIH1cclxuICB0cjpob3ZlciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRjVGNUY1O1xyXG4gIH1cclxuICBkaXYuZ3JhcGgtY29udGFpbmVyIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgbWFyZ2luOiAwLjVlbTtcclxuICAgIHdpZHRoOiBjYWxjKDUwJSAtIDFlbSk7XHJcbiAgfVxyXG4gIGEjdmlld1NvdXJjZSB7XHJcbiAgICBjbGVhcjogYm90aDtcclxuICB9XHJcbiAgZGl2LnVzZXJzLWJveCB7XHJcbiAgICBtYXJnaW4tdG9wOiAxNXB4O1xyXG4gICAgaGVpZ2h0OiAxNTBweDsgd2lkdGg6IDEwMCU7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCBibGFjaztcclxuICAgIG92ZXJmbG93LXk6IHNjcm9sbFxyXG4gIH1cclxuICBkaXYudXNlci1ib3h7XHJcbiAgICBoZWlnaHQ6IDQwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG4gICAgbGluZS1oZWlnaHQ6IDQwcHg7XHJcbiAgfVxyXG4gIGRpdi51c2VyLWJveC5zZWxlY3RlZHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGRhcmtncmV5ICFpbXBvcnRhbnQ7XHJcbiAgfVxyXG4gIGRpdi51c2VyLWJveC5pbkNhbGwge1xyXG4gICAgY29sb3I6IHJlZDtcclxuICAgIGN1cnNvcjogZGVmYXVsdDtcclxuICB9XHJcbiAgZGl2LnVzZXItYm94Om50aC1jaGlsZChldmVuKXtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGJlaWdlO1xyXG4gIH1cclxuICAucm93IHtcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbiAgfSJdfQ== */"
+module.exports = "audio {\r\n    width: 90%;\r\n  }\r\n  table {\r\n    border-collapse: collapse;\r\n  }\r\n  th, td {\r\n    border: 1px solid black;\r\n  }\r\n  tr:hover {\r\n    background-color: #F5F5F5;\r\n  }\r\n  div.graph-container {\r\n    float: left;\r\n    margin: 0.5em;\r\n    width: calc(50% - 1em);\r\n  }\r\n  a#viewSource {\r\n    clear: both;\r\n  }\r\n  div.users-box {\r\n    margin-top: 15px;\r\n    height: 150px; width: 100%;\r\n    border: 2px solid black;\r\n    overflow-y: scroll\r\n  }\r\n  div.user-box{\r\n    height: 40px;\r\n    cursor: pointer;\r\n    vertical-align: middle;\r\n    line-height: 40px;\r\n  }\r\n  div.user-box.selected{\r\n    background-color: darkgrey !important;\r\n  }\r\n  div.user-box.inCall {\r\n    color: red;\r\n    cursor: default;\r\n  }\r\n  div.user-box:nth-child(even){\r\n    background-color: rgb(220, 245, 241);\r\n  }\r\n  .row {\r\n    margin-bottom: 10px;\r\n  }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZmFjaWxpdHktaHViLWNvbm5lY3Rvci9mYWNpbGl0eS1odWItY29ubmVjdG9yLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxVQUFVO0VBQ1o7RUFDQTtJQUNFLHlCQUF5QjtFQUMzQjtFQUNBO0lBQ0UsdUJBQXVCO0VBQ3pCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLFdBQVc7SUFDWCxhQUFhO0lBQ2Isc0JBQXNCO0VBQ3hCO0VBQ0E7SUFDRSxXQUFXO0VBQ2I7RUFDQTtJQUNFLGdCQUFnQjtJQUNoQixhQUFhLEVBQUUsV0FBVztJQUMxQix1QkFBdUI7SUFDdkI7RUFDRjtFQUNBO0lBQ0UsWUFBWTtJQUNaLGVBQWU7SUFDZixzQkFBc0I7SUFDdEIsaUJBQWlCO0VBQ25CO0VBQ0E7SUFDRSxxQ0FBcUM7RUFDdkM7RUFDQTtJQUNFLFVBQVU7SUFDVixlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxvQ0FBb0M7RUFDdEM7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQiIsImZpbGUiOiJzcmMvYXBwL2ZhY2lsaXR5LWh1Yi1jb25uZWN0b3IvZmFjaWxpdHktaHViLWNvbm5lY3Rvci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiYXVkaW8ge1xyXG4gICAgd2lkdGg6IDkwJTtcclxuICB9XHJcbiAgdGFibGUge1xyXG4gICAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcclxuICB9XHJcbiAgdGgsIHRkIHtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkIGJsYWNrO1xyXG4gIH1cclxuICB0cjpob3ZlciB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjRjVGNUY1O1xyXG4gIH1cclxuICBkaXYuZ3JhcGgtY29udGFpbmVyIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgbWFyZ2luOiAwLjVlbTtcclxuICAgIHdpZHRoOiBjYWxjKDUwJSAtIDFlbSk7XHJcbiAgfVxyXG4gIGEjdmlld1NvdXJjZSB7XHJcbiAgICBjbGVhcjogYm90aDtcclxuICB9XHJcbiAgZGl2LnVzZXJzLWJveCB7XHJcbiAgICBtYXJnaW4tdG9wOiAxNXB4O1xyXG4gICAgaGVpZ2h0OiAxNTBweDsgd2lkdGg6IDEwMCU7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCBibGFjaztcclxuICAgIG92ZXJmbG93LXk6IHNjcm9sbFxyXG4gIH1cclxuICBkaXYudXNlci1ib3h7XHJcbiAgICBoZWlnaHQ6IDQwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xyXG4gICAgbGluZS1oZWlnaHQ6IDQwcHg7XHJcbiAgfVxyXG4gIGRpdi51c2VyLWJveC5zZWxlY3RlZHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IGRhcmtncmV5ICFpbXBvcnRhbnQ7XHJcbiAgfVxyXG4gIGRpdi51c2VyLWJveC5pbkNhbGwge1xyXG4gICAgY29sb3I6IHJlZDtcclxuICAgIGN1cnNvcjogZGVmYXVsdDtcclxuICB9XHJcbiAgZGl2LnVzZXItYm94Om50aC1jaGlsZChldmVuKXtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYigyMjAsIDI0NSwgMjQxKTtcclxuICB9XHJcbiAgLnJvdyB7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xyXG4gIH0iXX0= */"
 
 /***/ }),
 
@@ -386,7 +429,7 @@ module.exports = "audio {\r\n    width: 90%;\r\n  }\r\n  table {\r\n    border-c
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<h4 [hidden]=\"true\">\r\n  <!--No need for this-->\r\n  Connection Status: {{connectionStatus}}\r\n</h4>\r\n<div class=\"row\" [hidden]=\"true\">\r\n  <div class=\"col\">\r\n    <label for=\"nameInput\">Enter your name:</label>\r\n    <input class=\"form-control\" id=\"nameInput\" placeholder=\"Enter your name\" [(ngModel)]=\"nameInput\"\r\n      [disabled]=\"!nameInputEnabled\" (ngModelChange)=\"onNameInputChange($event)\" />\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col col-auto d-flex flex-column\">\r\n    <button class=\"btn btn-success\" id=\"connectToHubButton\" (click)=\"onConnectToHubClick($event)\"\r\n      [hidden]=\"!connectToHubEnabled\">Connect to Server</button>\r\n    <button class=\"btn btn-danger\" id=\"disconnectFromHubButton\" (click)=\"onDisconnectFromHubClick($event)\"\r\n      [hidden]=\"!disconnectFromHubEnabled\">Disconnect from Server</button>\r\n  </div>\r\n  <div class=\"col col-auto d-flex flex-column\">\r\n    <button class=\"btn btn-success\" id=\"connectToUserButton\" (click)=\"onConnectToUserClick($event)\"\r\n      [hidden]=\"!connectToUserEnabled || !allowConnectToUser\">Connect To User</button>\r\n    <button class=\"btn btn-danger\" id=\"disconnectFromUserButton\" (click)=\"onDisconnectFromUserClick($event)\"\r\n      [hidden]=\"!disconnectFromUserEnabled\">Disconnect From User\r\n    </button>\r\n  </div>\r\n</div>\r\n<h4 *ngIf=\"!connectedToUser\" style=\"color: white; font-size: 25px;\">Available Users:</h4>\r\n<div class=\"row\" *ngIf=\"!connectedToUser\">\r\n  <div class=\"col\">\r\n    <div id=\"users-list\" class=\"users-box\">\r\n      <div *ngFor=\"let user of connectedHubUsers\" class=\"user-box\" (click)=\"onUserClicked(user)\"\r\n        [class.selected]=\"selectedUser && selectedUser.connectionId == user.connectionId\">\r\n        <div *ngIf=\"!user.connectedToOtherUsers\">{{user.name}}</div>\r\n        <!--<div *ngIf=\"user.connectedToOtherUsers\">{{user.name}} (unavailable)</div>-->\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<h4 [hidden]=\"true\">\r\n  <!--No need for this-->\r\n  Connection Status: {{connectionStatus}}\r\n</h4>\r\n<div class=\"row\" [hidden]=\"true\">\r\n  <div class=\"col\">\r\n    <label for=\"nameInput\">Enter your name:</label>\r\n    <input class=\"form-control\" id=\"nameInput\" placeholder=\"Enter your name\" [(ngModel)]=\"nameInput\"\r\n      [disabled]=\"!nameInputEnabled\" (ngModelChange)=\"onNameInputChange($event)\" />\r\n  </div>\r\n</div>\r\n<div class=\"row\">\r\n  <div class=\"col col-auto d-flex flex-column\">\r\n    <button class=\"btn btn-success\" id=\"connectToHubButton\" (click)=\"onConnectToHubClick($event)\"\r\n      [hidden]=\"!connectToHubEnabled\">Connect to Server</button>\r\n    <button class=\"btn btn-danger\" id=\"disconnectFromHubButton\" (click)=\"onDisconnectFromHubClick($event)\"\r\n      [hidden]=\"!disconnectFromHubEnabled\">Disconnect from Server</button>\r\n  </div>\r\n  <div class=\"col col-auto d-flex flex-column\">\r\n    <button class=\"btn btn-success\" id=\"connectToUserButton\" (click)=\"onConnectToUserClick($event)\"\r\n      [hidden]=\"!connectToUserEnabled || !allowConnectToUser\">Connect To User</button>\r\n    <button class=\"btn btn-danger\" id=\"disconnectFromUserButton\" (click)=\"onDisconnectFromUserClick($event)\"\r\n      [hidden]=\"!disconnectFromUserEnabled\">Disconnect From User\r\n    </button>\r\n  </div>\r\n</div>\r\n<h4 *ngIf=\"!connectedToUser\" style=\"color: white; font-size: 25px;\">Available Users:</h4>\r\n<div class=\"row\" *ngIf=\"!connectedToUser\">\r\n  <div class=\"col\">\r\n    <div id=\"users-list\" class=\"users-box\">\r\n      <div *ngFor=\"let user of connectedHubUsers\" class=\"user-box\" (click)=\"onUserClicked(user)\"\r\n        [class.selected]=\"selectedUser && selectedUser.connectionId == user.connectionId\">\r\n        <div *ngIf=\"!user.connectedToOtherUsers\">\r\n          <p style=\"color: white; font-size: 25px;\">{{user.name}}</p>\r\n        </div>\r\n        <!--<div *ngIf=\"user.connectedToOtherUsers\">{{user.name}} (unavailable)</div>-->\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -465,6 +508,9 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
             .configureLogging(_microsoft_signalr__WEBPACK_IMPORTED_MODULE_3__["LogLevel"].Information)
             .build();
         this.hubConnection.start().then(function () {
+            _this.nameInput = "Quentin Baker";
+            _this.facilityId = guid_typescript__WEBPACK_IMPORTED_MODULE_5__["Guid"].parse("5d033f7a-2118-4db8-b16c-ebf9599c4634"); // ==> b77d409a-10cd-4a47-8e94-b0cd0ab50aa1
+            console.log(_this.facilityId);
             if (_this.nameInput) {
                 _this.nameInputEnabled = true;
                 _this.connectToHubEnabled = true;
@@ -474,9 +520,9 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
             _this.onError(err);
         });
         this.hubConnection.on("Connected", function (msg) { return _this.hubConnectionConnected(msg); });
+        this.hubConnection.on("UserConnected", function (msg) { return _this.hubConnectionUserConnected(msg); });
         this.hubConnection.on("MessageReceived", function (msg) { return _this.hubConnectionMessageReceived(msg); });
         this.hubConnection.on("UsersUpdated", function (msg) { return _this.hubUsersUpdated(msg); });
-        this.hubConnection.on("UserConnected", function (msg) { return _this.hubConnectionUserConnected(msg); });
         this.hubConnection.on("UserDisconnected", function (msg) { return _this.hubConnectionUserDisconnected(msg); });
         this.hubConnection.onclose(function (err) {
             if (_this.userConnected) {
@@ -517,6 +563,7 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
         }
     };
     FacilityHubConnectorComponent.prototype.hubConnectionConnected = function (hubMessage) {
+        console.log("Ran Connected");
         var user = JSON.parse(hubMessage.message);
         this.localUser = user;
         this.connectedToHub = true;
@@ -532,6 +579,7 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
         this.selectedUser = null;
         this.connectToUserEnabled = false;
         this.disconnectFromUserEnabled = true;
+        console.log("Connected to user: " + hubMessage.from.name);
     };
     FacilityHubConnectorComponent.prototype.hubConnectionUserDisconnected = function (hubMessage) {
         this.connectedUser = null;
@@ -551,15 +599,19 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
                 _this.localUser = u;
             }
             else if (!u.connectedToOtherUsers) {
-                if (u.userOrigin == "Device" && _this.allowDeviceUserConnections) {
+                if (_this.allowDeviceUserConnections) {
                     _this.connectedHubUsers.push(u);
                 }
-                else if (u.userOrigin == "WebPortal" && _this.allowWebUserConnections) {
-                    _this.connectedHubUsers.push(u);
-                }
+                /*
+                if (u.userOrigin == "WebPortal" && this.allowDeviceUserConnections) {
+                  this.connectedHubUsers.push(u);
+                  console.log("Device");
+                } else if (u.userOrigin == "Device" && this.allowWebUserConnections) {
+                  this.connectedHubUsers.push(u);
+                  console.log("WebPortal");
+                }*/
             }
         });
-        //this.connectedHubUsers.push(this.localUser);
     };
     FacilityHubConnectorComponent.prototype.hubConnectionMessageReceived = function (hubMessage) {
         this.messageReceived.emit(hubMessage);
@@ -582,7 +634,7 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
         var _this = this;
         this.connectToHubEnabled = false;
         this.nameInputEnabled = false;
-        this.hubConnection.invoke("ConnectWebPortalUser", this.nameInput, this.facilityId)
+        this.hubConnection.invoke("ConnectWebPortalUser", this.nameInput, this.facilityId.toString())
             .catch(function (err) {
             _this.onError(err);
             _this.connectToHubEnabled = true;
@@ -833,7 +885,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Crestron\Angular\AngularSandbox\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! F:\dev\angular\angular-sandbox\src\main.ts */"./src/main.ts");
 
 
 /***/ })

@@ -1,5 +1,25 @@
+@keyframes test{
+    0% {
+      width: 100px;
+    } 
+    100% {
+        width:300px;
+    }
+
+}
 #comHeader{
     color: whitesmoke;
     font-size:60px;
     margin: 0;
 }
+div {
+    width: 100px;
+    height: 100px;
+    background: red;
+    animation:none;
+  }
+  
+  div:hover {
+    animation:test 2s;
+    animation-fill-mode: forwards;
+  }

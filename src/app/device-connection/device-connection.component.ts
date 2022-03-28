@@ -2,6 +2,7 @@ import { Component, OnInit, Output } from '@angular/core';
 import { SignalRService } from '../services/signal-r.service';
 import { PolarModel } from '../_interfaces/polar.model';
 import { Guid } from 'guid-typescript';
+import { OximeterModel } from '../_interfaces/oximeter.model';
 
 @Component({
   selector: 'app-device-connection',
@@ -16,7 +17,7 @@ export class DeviceConnectionComponent implements OnInit {
   options = {
     filters: [
       {services: ['heart_rate']},
-      {services: [0x1802, 0x1803]},
+      {services: [0x1802, 0x1803, 0x1822]},
     ]
   } 
   hubEndpoint:string = "sdfdf";
