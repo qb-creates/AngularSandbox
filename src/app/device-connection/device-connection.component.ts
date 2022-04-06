@@ -17,7 +17,7 @@ export class DeviceConnectionComponent implements OnInit {
   options = {
     filters: [
       {services: ['heart_rate']},
-      {services: [0x1802, 0x1803, 0x1822]},
+      {services: [0x1822]}
     ]
   } 
   hubEndpoint:string = "sdfdf";
@@ -37,6 +37,7 @@ export class DeviceConnectionComponent implements OnInit {
   }
 
   onUserConnected(){
+    console.log("connected");
     this.signalRService.startConnection();
     this.signalRService.addTransferListener();
     return navigator.bluetooth.requestDevice(this.options)

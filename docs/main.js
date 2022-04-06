@@ -205,7 +205,7 @@ var AppModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "@-webkit-keyframes test{\r\n    from {\r\n      width: 100px;\r\n    } \r\n    to {\r\n        width:300px;\r\n    }\r\n}\r\n@keyframes test{\r\n    from {\r\n      width: 100px;\r\n    } \r\n    to {\r\n        width:300px;\r\n    }\r\n}\r\n#comHeader{\r\n    color: whitesmoke;\r\n    font-size:60px;\r\n    margin: 0;\r\n}\r\ndiv {\r\n    width: 100px;\r\n    height: 100px;\r\n    background: red;\r\n    -webkit-animation-name:test;\r\n            animation-name:test;\r\n    -webkit-animation-duration:1s;\r\n            animation-duration:1s;\r\n  }\r\ndiv:hover {\r\n    width: 300px;\r\n  }\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYmx1ZXRvb3RoLWxpc3RpbmcvYmx1ZXRvb3RoLWxpc3RpbmcuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJO01BQ0UsWUFBWTtJQUNkO0lBQ0E7UUFDSSxXQUFXO0lBQ2Y7QUFDSjtBQVBBO0lBQ0k7TUFDRSxZQUFZO0lBQ2Q7SUFDQTtRQUNJLFdBQVc7SUFDZjtBQUNKO0FBQ0E7SUFDSSxpQkFBaUI7SUFDakIsY0FBYztJQUNkLFNBQVM7QUFDYjtBQUNBO0lBQ0ksWUFBWTtJQUNaLGFBQWE7SUFDYixlQUFlO0lBQ2YsMkJBQW1CO1lBQW5CLG1CQUFtQjtJQUNuQiw2QkFBcUI7WUFBckIscUJBQXFCO0VBQ3ZCO0FBRUE7SUFDRSxZQUFZO0VBQ2QiLCJmaWxlIjoic3JjL2FwcC9ibHVldG9vdGgtbGlzdGluZy9ibHVldG9vdGgtbGlzdGluZy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiQGtleWZyYW1lcyB0ZXN0e1xyXG4gICAgZnJvbSB7XHJcbiAgICAgIHdpZHRoOiAxMDBweDtcclxuICAgIH0gXHJcbiAgICB0byB7XHJcbiAgICAgICAgd2lkdGg6MzAwcHg7XHJcbiAgICB9XHJcbn1cclxuI2NvbUhlYWRlcntcclxuICAgIGNvbG9yOiB3aGl0ZXNtb2tlO1xyXG4gICAgZm9udC1zaXplOjYwcHg7XHJcbiAgICBtYXJnaW46IDA7XHJcbn1cclxuZGl2IHtcclxuICAgIHdpZHRoOiAxMDBweDtcclxuICAgIGhlaWdodDogMTAwcHg7XHJcbiAgICBiYWNrZ3JvdW5kOiByZWQ7XHJcbiAgICBhbmltYXRpb24tbmFtZTp0ZXN0O1xyXG4gICAgYW5pbWF0aW9uLWR1cmF0aW9uOjFzO1xyXG4gIH1cclxuICBcclxuICBkaXY6aG92ZXIge1xyXG4gICAgd2lkdGg6IDMwMHB4O1xyXG4gIH1cclxuIl19 */"
+module.exports = "@-webkit-keyframes test{\r\n    0% {\r\n      width: 100px;\r\n    } \r\n    100% {\r\n        width:300px;\r\n    }\r\n\r\n}\r\n@keyframes test{\r\n    0% {\r\n      width: 100px;\r\n    } \r\n    100% {\r\n        width:300px;\r\n    }\r\n\r\n}\r\n#comHeader{\r\n    color: whitesmoke;\r\n    font-size:60px;\r\n    margin: 0;\r\n}\r\ndiv {\r\n    width: 100px;\r\n    height: 100px;\r\n    background: red;\r\n    -webkit-animation:none;\r\n            animation:none;\r\n  }\r\ndiv:hover {\r\n    -webkit-animation:test 2s;\r\n            animation:test 2s;\r\n    -webkit-animation-fill-mode: forwards;\r\n            animation-fill-mode: forwards;\r\n  }\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvYmx1ZXRvb3RoLWxpc3RpbmcvYmx1ZXRvb3RoLWxpc3RpbmcuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJO01BQ0UsWUFBWTtJQUNkO0lBQ0E7UUFDSSxXQUFXO0lBQ2Y7O0FBRUo7QUFSQTtJQUNJO01BQ0UsWUFBWTtJQUNkO0lBQ0E7UUFDSSxXQUFXO0lBQ2Y7O0FBRUo7QUFDQTtJQUNJLGlCQUFpQjtJQUNqQixjQUFjO0lBQ2QsU0FBUztBQUNiO0FBQ0E7SUFDSSxZQUFZO0lBQ1osYUFBYTtJQUNiLGVBQWU7SUFDZixzQkFBYztZQUFkLGNBQWM7RUFDaEI7QUFFQTtJQUNFLHlCQUFpQjtZQUFqQixpQkFBaUI7SUFDakIscUNBQTZCO1lBQTdCLDZCQUE2QjtFQUMvQiIsImZpbGUiOiJzcmMvYXBwL2JsdWV0b290aC1saXN0aW5nL2JsdWV0b290aC1saXN0aW5nLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJAa2V5ZnJhbWVzIHRlc3R7XHJcbiAgICAwJSB7XHJcbiAgICAgIHdpZHRoOiAxMDBweDtcclxuICAgIH0gXHJcbiAgICAxMDAlIHtcclxuICAgICAgICB3aWR0aDozMDBweDtcclxuICAgIH1cclxuXHJcbn1cclxuI2NvbUhlYWRlcntcclxuICAgIGNvbG9yOiB3aGl0ZXNtb2tlO1xyXG4gICAgZm9udC1zaXplOjYwcHg7XHJcbiAgICBtYXJnaW46IDA7XHJcbn1cclxuZGl2IHtcclxuICAgIHdpZHRoOiAxMDBweDtcclxuICAgIGhlaWdodDogMTAwcHg7XHJcbiAgICBiYWNrZ3JvdW5kOiByZWQ7XHJcbiAgICBhbmltYXRpb246bm9uZTtcclxuICB9XHJcbiAgXHJcbiAgZGl2OmhvdmVyIHtcclxuICAgIGFuaW1hdGlvbjp0ZXN0IDJzO1xyXG4gICAgYW5pbWF0aW9uLWZpbGwtbW9kZTogZm9yd2FyZHM7XHJcbiAgfVxyXG4iXX0= */"
 
 /***/ }),
 
@@ -216,7 +216,7 @@ module.exports = "@-webkit-keyframes test{\r\n    from {\r\n      width: 100px;\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<h1 id=\"comHeader\">E3K Heart Rate</h1>\r\n<button (click)=\"SearchBluetooth()\">Search BLE</button>\r\n\r\n<button (click)=\"SignalRSend()\">Signal-r Send</button>\r\n\r\n<button (click)=\"SignalRCloseStream()\">Signal-r Close</button>\r\n\r\n<div style=\"width:100px; height:100px; background-color:red;\">\r\n\r\n</div>\r\n\r\n\r\n"
+module.exports = "\r\n<h1 id=\"comHeader\">E3K Heart Rate</h1>\r\n<button (click)=\"SearchBluetooth()\">Search BLE</button>\r\n\r\n<button (click)=\"SignalRSend()\">Signal-r Send</button>\r\n\r\n<button (click)=\"SignalRCloseStream()\">Signal-r Close</button>\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -238,7 +238,12 @@ __webpack_require__.r(__webpack_exports__);
 
 var BluetoothListingComponent = /** @class */ (function () {
     function BluetoothListingComponent(signalRService) {
+        var _this = this;
         this.signalRService = signalRService;
+        this.oximeterModel = {
+            spo: 0,
+            heartRate: 0
+        };
         this.polarModel = {
             heartRate: 60,
             rrInterval: 900
@@ -246,9 +251,50 @@ var BluetoothListingComponent = /** @class */ (function () {
         this.options = {
             filters: [
                 { services: ['heart_rate'] },
-                { services: [0x1802, 0x1803] },
+                { services: [0x1822] }
             ]
         };
+        this.service = 0x0000;
+        this.characteristic = 0x0000;
+        this.RequestDevices = function () { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                console.log("Devices Requested");
+                return [2 /*return*/, navigator.bluetooth.requestDevice(this.options)];
+            });
+        }); };
+        this.ConnectDevice = function (device) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (device.name) {
+                    case "MD300CI218":
+                        this.service = 0x1822;
+                        this.characteristic = 0x2a5f;
+                        break;
+                    case "E3K-Wellovate":
+                        this.service = 'heart_rate';
+                        this.characteristic = 'heart_rate_measurement';
+                        break;
+                }
+                return [2 /*return*/, device.gatt.connect()];
+            });
+        }); };
+        this.GetService = function (server) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                return [2 /*return*/, server.getPrimaryService(this.service)];
+            });
+        }); };
+        this.GetCharacteristic = function (service) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                return [2 /*return*/, service.getCharacteristic(this.characteristic)];
+            });
+        }); };
+        this.StartAdvertisement = function (characteristic) { return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](_this, void 0, void 0, function () {
+            var char;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                char = characteristic.startNotifications();
+                characteristic.addEventListener('characteristicvaluechanged', this.CmDataParse);
+                return [2 /*return*/, char];
+            });
+        }); };
     }
     BluetoothListingComponent.prototype.ngOnInit = function () {
         this.signalRService.startConnection();
@@ -261,31 +307,25 @@ var BluetoothListingComponent = /** @class */ (function () {
         this.signalRService.closeStream();
     };
     BluetoothListingComponent.prototype.SearchBluetooth = function () {
-        var _this = this;
-        return navigator.bluetooth.requestDevice(this.options)
-            .then(function (device) {
-            return device.gatt.connect();
-        })
-            .then(function (server) {
-            return server.getPrimaryService('heart_rate');
-        })
-            .then(function (service) {
-            return service.getCharacteristic('heart_rate_measurement');
-        })
-            .then(function (characteristic) {
-            characteristic.startNotifications().then(function () {
-                characteristic.addEventListener('characteristicvaluechanged', function () {
-                    if (characteristic.value) {
-                        _this.polarModel.heartRate = characteristic.value.getUint8(0);
-                        _this.polarModel.rrInterval = Math.round(60000 / characteristic.value.getUint8(0));
-                        _this.signalRService.send(_this.polarModel);
-                    }
-                });
-            });
-        })
-            .catch(function (error) {
-            console.log('Argh!! ' + error);
-        });
+        var device = this.RequestDevices()
+            .then(this.ConnectDevice)
+            .then(this.GetService)
+            .then(this.GetCharacteristic)
+            .then(this.StartAdvertisement);
+    };
+    BluetoothListingComponent.prototype.E3kDataParse = function (event) {
+        if (event.target.value) {
+            this.polarModel.heartRate = event.target.value.getUint8(0);
+            this.polarModel.rrInterval = Math.round(60000 / event.target.value.getUint8(0));
+            console.log("Heart Rate: " + this.polarModel.heartRate + "   Heart Rate: " + this.polarModel.rrInterval);
+            //this.signalRService.send(this.polarModel);
+        }
+    };
+    BluetoothListingComponent.prototype.CmDataParse = function (event) {
+        if (event.target.value) {
+            console.log("SPO2: " + event.target.value.getUint8(1) + "   Heart Rate: " + event.target.value.getUint8(3));
+            //this.signalRService.send(this.polarModel);
+        }
     };
     BluetoothListingComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -320,7 +360,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<facility-hub-connector [hubEndpoint]=\"hubEndpoint\" [facilityId]=\"facilityId\" [allowDeviceUserConnections]=\"true\"\n  [allowWebUserConnections]=\"false\" [allowConnectToUser]=\"connectToUserEnabled\"\n  (messageReceived)=\"onMessageReceived($event)\" (connected)=\"onConnected()\" (userConnected)=\"onUserConnected($event)\"\n  (userDisconnected)=\"onUserDisconnected()\" (disconnected)=\"onDisconnected()\"></facility-hub-connector>"
+module.exports = "<facility-hub-connector [hubEndpoint]=\"hubEndpoint\" [facilityId]=\"facilityId\" [allowDeviceUserConnections]=\"true\"\n  [allowWebUserConnections]=\"false\" [allowConnectToUser]=\"connectToUserEnabled\"\n  (messageReceived)=\"onMessageReceived($event)\" (connected)=\"onConnected()\" (userConnected)=\"onUserConnected($event)\"\n  (userDisconnected)=\"onUserDisconnected()\" (disconnected)=\"onDisconnected()\"></facility-hub-connector>\n"
 
 /***/ }),
 
@@ -350,7 +390,7 @@ var DeviceConnectionComponent = /** @class */ (function () {
         this.options = {
             filters: [
                 { services: ['heart_rate'] },
-                { services: [0x1802, 0x1803] },
+                { services: [0x1802, 0x1803, 0x1822] },
             ]
         };
         this.hubEndpoint = "sdfdf";
@@ -885,7 +925,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\dev\angular\angular-sandbox\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! F:\Dev\Angular\angular-sandbox\src\main.ts */"./src/main.ts");
 
 
 /***/ })
