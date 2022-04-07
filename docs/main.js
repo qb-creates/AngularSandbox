@@ -93,7 +93,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<app-device-connection></app-device-connection>\n<app-bluetooth-listing></app-bluetooth-listing>\n<router-outlet></router-outlet>\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<app-product-list></app-product-list>\n\n<router-outlet></router-outlet>\n"
 
 /***/ }),
 
@@ -154,10 +154,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _device_connection_device_connection_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./device-connection/device-connection.component */ "./src/app/device-connection/device-connection.component.ts");
 /* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm5/animations.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _product_details_product_details_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./product-details/product-details.component */ "./src/app/product-details/product-details.component.ts");
+/* harmony import */ var _product_list_product_list_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./product-list/product-list.component */ "./src/app/product-list/product-list.component.ts");
 
 
 
 //import {NgChartsModule} from 'ng2-charts';
+
+
+
 
 
 
@@ -176,7 +182,9 @@ var AppModule = /** @class */ (function () {
                 _app_component__WEBPACK_IMPORTED_MODULE_5__["AppComponent"],
                 _bluetooth_listing_bluetooth_listing_component__WEBPACK_IMPORTED_MODULE_6__["BluetoothListingComponent"],
                 _facility_hub_connector_facility_hub_connector_component__WEBPACK_IMPORTED_MODULE_7__["FacilityHubConnectorComponent"],
-                _device_connection_device_connection_component__WEBPACK_IMPORTED_MODULE_9__["DeviceConnectionComponent"]
+                _device_connection_device_connection_component__WEBPACK_IMPORTED_MODULE_9__["DeviceConnectionComponent"],
+                _product_details_product_details_component__WEBPACK_IMPORTED_MODULE_13__["ProductDetailsComponent"],
+                _product_list_product_list_component__WEBPACK_IMPORTED_MODULE_14__["ProductListComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -185,6 +193,10 @@ var AppModule = /** @class */ (function () {
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormsModule"],
                 ngx_toastr__WEBPACK_IMPORTED_MODULE_10__["ToastrModule"].forRoot(),
+                _angular_router__WEBPACK_IMPORTED_MODULE_12__["RouterModule"].forRoot([
+                    { path: '', component: _product_list_product_list_component__WEBPACK_IMPORTED_MODULE_14__["ProductListComponent"] },
+                    { path: 'products/:productId', component: _product_details_product_details_component__WEBPACK_IMPORTED_MODULE_13__["ProductDetailsComponent"] },
+                ]),
                 _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClientModule"]
             ],
             providers: [],
@@ -216,7 +228,7 @@ module.exports = "@-webkit-keyframes test{\r\n    0% {\r\n      width: 100px;\r\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<h1 id=\"comHeader\">E3K Heart Rate</h1>\r\n<button (click)=\"SearchBluetooth()\">Search BLE</button>\r\n\r\n<button (click)=\"SignalRSend()\">Signal-r Send</button>\r\n\r\n<button (click)=\"SignalRCloseStream()\">Signal-r Close</button>\r\n\r\n\r\n\r\n"
+module.exports = "\r\n<h1 id=\"comHeader\">E3K Heart Rate</h1>\r\n<button (click)=\"SearchBluetooth()\">Search BLE</button>\r\n\r\n<button (click)=\"SignalRSend()\">Signal-r Send</button>\r\n\r\n<button (click)=\"SignalRCloseStream()\">Signal-r Close</button>\r\n\r\n<a title=\"E3K\" routerLink =\"../device-connection\">This is test navigation</a>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -390,7 +402,7 @@ var DeviceConnectionComponent = /** @class */ (function () {
         this.options = {
             filters: [
                 { services: ['heart_rate'] },
-                { services: [0x1802, 0x1803, 0x1822] },
+                { services: [0x1822] }
             ]
         };
         this.hubEndpoint = "sdfdf";
@@ -404,6 +416,7 @@ var DeviceConnectionComponent = /** @class */ (function () {
     };
     DeviceConnectionComponent.prototype.onUserConnected = function () {
         var _this = this;
+        console.log("connected");
         this.signalRService.startConnection();
         this.signalRService.addTransferListener();
         return navigator.bluetooth.requestDevice(this.options)
@@ -802,6 +815,160 @@ var FacilityHubConnectorComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/app/product-details/product-details.component.css":
+/*!***************************************************************!*\
+  !*** ./src/app/product-details/product-details.component.css ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2R1Y3QtZGV0YWlscy9wcm9kdWN0LWRldGFpbHMuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/product-details/product-details.component.html":
+/*!****************************************************************!*\
+  !*** ./src/app/product-details/product-details.component.html ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<p>\n  product-details works!\n</p>\n"
+
+/***/ }),
+
+/***/ "./src/app/product-details/product-details.component.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/product-details/product-details.component.ts ***!
+  \**************************************************************/
+/*! exports provided: ProductDetailsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductDetailsComponent", function() { return ProductDetailsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var ProductDetailsComponent = /** @class */ (function () {
+    function ProductDetailsComponent() {
+    }
+    ProductDetailsComponent.prototype.ngOnInit = function () {
+    };
+    ProductDetailsComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-product-details',
+            template: __webpack_require__(/*! ./product-details.component.html */ "./src/app/product-details/product-details.component.html"),
+            styles: [__webpack_require__(/*! ./product-details.component.css */ "./src/app/product-details/product-details.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], ProductDetailsComponent);
+    return ProductDetailsComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/product-list/product-list.component.css":
+/*!*********************************************************!*\
+  !*** ./src/app/product-list/product-list.component.css ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3Byb2R1Y3QtbGlzdC9wcm9kdWN0LWxpc3QuY29tcG9uZW50LmNzcyJ9 */"
+
+/***/ }),
+
+/***/ "./src/app/product-list/product-list.component.html":
+/*!**********************************************************!*\
+  !*** ./src/app/product-list/product-list.component.html ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<h2>Products</h2>\n\n<div *ngFor=\"let product of products\">\n\n  <h3>\n    <a [title]=\"product.name + ' details'\">\n      {{ product.name }}\n    </a>\n  </h3>\n\n  <p *ngIf=\"product.description\">\n    Description: {{ product.description }}\n  </p>\n\n  <button type=\"button\" (click)=\"share()\">\n    Share\n  </button>\n\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/product-list/product-list.component.ts":
+/*!********************************************************!*\
+  !*** ./src/app/product-list/product-list.component.ts ***!
+  \********************************************************/
+/*! exports provided: ProductListComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductListComponent", function() { return ProductListComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _products__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./products */ "./src/app/product-list/products.ts");
+
+
+
+var ProductListComponent = /** @class */ (function () {
+    function ProductListComponent() {
+        this.products = _products__WEBPACK_IMPORTED_MODULE_2__["products"];
+    }
+    ProductListComponent.prototype.share = function () {
+        window.alert('The product has been shared!');
+    };
+    ProductListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-product-list',
+            template: __webpack_require__(/*! ./product-list.component.html */ "./src/app/product-list/product-list.component.html"),
+            styles: [__webpack_require__(/*! ./product-list.component.css */ "./src/app/product-list/product-list.component.css")]
+        })
+    ], ProductListComponent);
+    return ProductListComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "./src/app/product-list/products.ts":
+/*!******************************************!*\
+  !*** ./src/app/product-list/products.ts ***!
+  \******************************************/
+/*! exports provided: products */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "products", function() { return products; });
+var products = [
+    {
+        id: 1,
+        name: 'Phone XL',
+        price: 799,
+        description: 'A large phone with one of the best screens'
+    },
+    {
+        id: 2,
+        name: 'Phone Mini',
+        price: 699,
+        description: 'A great phone with one of the best cameras'
+    },
+    {
+        id: 3,
+        name: 'Phone Standard',
+        price: 299,
+        description: ''
+    }
+];
+/*
+Copyright Google LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at https://angular.io/license
+*/ 
+
+
+/***/ }),
+
 /***/ "./src/app/services/signal-r.service.ts":
 /*!**********************************************!*\
   !*** ./src/app/services/signal-r.service.ts ***!
@@ -925,7 +1092,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! F:\Dev\Angular\angular-sandbox\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! F:\dev\angular\angular-sandbox\src\main.ts */"./src/main.ts");
 
 
 /***/ })

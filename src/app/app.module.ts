@@ -10,12 +10,19 @@ import { FacilityHubConnectorComponent } from './facility-hub-connector/facility
 import { DeviceConnectionComponent } from './device-connection/device-connection.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductAlertsComponent } from './product-alerts/product-alerts.component';
 @NgModule({
   declarations: [
     AppComponent,
     BluetoothListingComponent,
     FacilityHubConnectorComponent,
-    DeviceConnectionComponent
+    DeviceConnectionComponent,
+    ProductDetailsComponent,
+    ProductListComponent,
+    ProductAlertsComponent
   ],
   imports: [
     BrowserModule,
@@ -24,6 +31,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule, 
     FormsModule,
     ToastrModule.forRoot(),
+    RouterModule.forRoot([
+      { path: '', component: BluetoothListingComponent },
+      { path: 'products/:productId', component: ProductDetailsComponent },
+      { path: 'products', component: ProductListComponent}
+    ]),
     HttpClientModule
   ],
   providers: [],
