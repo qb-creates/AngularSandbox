@@ -14,6 +14,7 @@ import { RouterModule } from '@angular/router';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductAlertsComponent } from './product-alerts/product-alerts.component';
+import { HttpTestComponent } from './http-test/http-test.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { ProductAlertsComponent } from './product-alerts/product-alerts.componen
     DeviceConnectionComponent,
     ProductDetailsComponent,
     ProductListComponent,
-    ProductAlertsComponent
+    ProductAlertsComponent,
+    HttpTestComponent
   ],
   imports: [
     BrowserModule,
