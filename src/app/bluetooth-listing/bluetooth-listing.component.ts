@@ -39,6 +39,7 @@ export class BluetoothListingComponent{
     navigator.bluetooth.addEventListener('advertisementreceived', e => {
       console.log('advertisement received');
     });
+    console.log("new changes in");
   }
   SignalRSend(){
     this.signalRService.send2(); 
