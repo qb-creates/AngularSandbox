@@ -33,6 +33,12 @@ export class BluetoothListingComponent{
   ngOnInit(){
     this.signalRService.startConnection();
     this.signalRService.addTransferListener();
+    navigator.bluetooth.addEventListener('availabilitychanged', e => {
+      console.log('availability changed');
+    });
+    navigator.bluetooth.addEventListener('advertisementreceived', e => {
+      console.log('advertisement received');
+    });
   }
   SignalRSend(){
     this.signalRService.send2(); 
@@ -40,10 +46,14 @@ export class BluetoothListingComponent{
   SignalRCloseStream(){
     this.signalRService.closeStream();
   }
-  SearchBluetooth() {
+  SearchBluetooth = async () => {
     //this.testmethod();
-    const device = this.RequestDevices()
-    .then(this.ConnectDevice)
+    const device = await this.RequestDevices();
+    device.watchAdvertisements();
+    device.addEventListener('advertisementreceived', e=>{
+      console.log("device advertisement listener");
+    });
+    this.ConnectDevice(device)
     .then(this.GetService)
     .then(this.GetCharacteristic)
     .then(this.StartAdvertisement);
